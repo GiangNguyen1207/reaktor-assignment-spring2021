@@ -1,0 +1,16 @@
+.nav-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &__item {
+    padding: 15px;
+    &:hover {
+      cursor: pointer;
+      background: #e79e4f;
+    }
+  }
+}
