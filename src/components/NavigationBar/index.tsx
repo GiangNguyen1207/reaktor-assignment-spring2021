@@ -7,7 +7,11 @@ const NavigationBar = () => {
   return (
     <ul className="nav-list">
       {categories.map((cat) => {
-        return <li className="nav-list__item">{cat}</li>;
+        return (
+          <li className="nav-list__item" key={cat}>
+            {cat}
+          </li>
+        );
       })}
     </ul>
   );
