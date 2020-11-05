@@ -1,0 +1,9 @@
+{
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  }
+}
