@@ -7,7 +7,6 @@ import { GET_PRODUCTS, GetProductsAction } from "redux/type";
 function* getProducts() {
   yield takeEvery(GET_PRODUCTS, function* (action: GetProductsAction) {
     try {
-      console.log("in");
       const category = action.payload;
       const products = yield call(API.getProduct, category);
       yield put(getProductSuccess(products));
