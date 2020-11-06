@@ -9,6 +9,7 @@ const initialState: RootState = {
     jackets: undefined,
     shirts: undefined,
     accessories: undefined,
+    availability: [],
   },
 };
 

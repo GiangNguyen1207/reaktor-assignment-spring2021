@@ -1,14 +1,17 @@
 import {
   GET_PRODUCTS_SUCCESS,
+  GET_AVAILABILITY_SUCCESS,
   ProductActions,
   ProductState,
   Product,
+  Response,
 } from "../type";
 
 const initialState: ProductState = {
   jackets: undefined,
   shirts: undefined,
   accessories: undefined,
+  availability: [],
 };
 
 export function product(
@@ -36,6 +39,16 @@ export function product(
       return {
         ...state,
         accessories: action.payload,
+      };
+
+    case GET_AVAILABILITY_SUCCESS:
+      const { productId, response } = action.payload;
+      const filteredRes: Response[] = response.filter(
+        (res) => res.id.toLowerCase() === productId
+      );
+      return {
+        ...state,
+        availability: filteredRes,
       };
 
     default:

@@ -1,11 +1,11 @@
 import {
   GET_PRODUCTS,
   GET_PRODUCTS_SUCCESS,
-  GET_JACKETS_SUCCESS,
-  GET_SHIRTS_SUCCESS,
-  GET_ACCESSORIES_SUCCESS,
+  GET_AVAILABILITY,
+  GET_AVAILABILITY_SUCCESS,
   ProductActions,
   Product,
+  Response,
 } from "./type";
 
 export function getProducts(category: string): ProductActions {
@@ -15,30 +15,35 @@ export function getProducts(category: string): ProductActions {
   };
 }
 
-export function getJacketsSuccess(products: Product[]): ProductActions {
-  return {
-    type: GET_JACKETS_SUCCESS,
-    payload: products,
-  };
-}
-
-export function getShirtSuccess(products: Product[]): ProductActions {
-  return {
-    type: GET_SHIRTS_SUCCESS,
-    payload: products,
-  };
-}
-
-export function getAccessoriesSuccess(products: Product[]): ProductActions {
-  return {
-    type: GET_ACCESSORIES_SUCCESS,
-    payload: products,
-  };
-}
-
 export function getProductSuccess(products: Product[]): ProductActions {
   return {
     type: GET_PRODUCTS_SUCCESS,
     payload: products,
+  };
+}
+
+export function getAvailability(
+  productId: string,
+  manufacturer: string
+): ProductActions {
+  return {
+    type: GET_AVAILABILITY,
+    payload: {
+      productId,
+      manufacturer,
+    },
+  };
+}
+
+export function getAvailabilitySuccess(
+  productId: string,
+  response: Response[]
+): ProductActions {
+  return {
+    type: GET_AVAILABILITY_SUCCESS,
+    payload: {
+      productId,
+      response,
+    },
   };
 }

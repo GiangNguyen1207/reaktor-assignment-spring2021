@@ -6,7 +6,7 @@ import TableBody from "components/TableBody";
 import "./styles.scss";
 
 const Jackets = () => {
-  const { jackets, shirts, accessories } = useProduct();
+  const { jackets, shirts, accessories, availability } = useProduct();
 
   return (
     <table className="table">
@@ -15,7 +15,8 @@ const Jackets = () => {
       </thead>
       <tbody>
         <TableBody
-          jackets={
+          availability={availability}
+          products={
             location.pathname === "/"
               ? jackets
               : location.pathname === "/shirts"
