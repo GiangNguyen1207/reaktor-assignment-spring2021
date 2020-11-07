@@ -3,6 +3,8 @@ import {
   GET_PRODUCTS_SUCCESS,
   GET_AVAILABILITY,
   GET_AVAILABILITY_SUCCESS,
+  DECREASE_PRODUCT_AVAILABILITY,
+  DECREASE_PRODUCT_AVAILABILITY_SUCCESS,
   ProductActions,
   Product,
   Response,
@@ -35,15 +37,31 @@ export function getAvailability(
   };
 }
 
-export function getAvailabilitySuccess(
-  productId: string,
-  response: Response[]
-): ProductActions {
+export function getAvailabilitySuccess(response: Response[]): ProductActions {
   return {
     type: GET_AVAILABILITY_SUCCESS,
+    payload: response,
+  };
+}
+
+export function decreaseProductAvailability(
+  availability: Response[],
+  productId?: string
+): ProductActions {
+  return {
+    type: DECREASE_PRODUCT_AVAILABILITY,
     payload: {
       productId,
-      response,
+      availability,
     },
+  };
+}
+
+export function decreaseProductAvailabilitySuccess(
+  availability: Response[]
+): ProductActions {
+  return {
+    type: DECREASE_PRODUCT_AVAILABILITY_SUCCESS,
+    payload: availability,
   };
 }

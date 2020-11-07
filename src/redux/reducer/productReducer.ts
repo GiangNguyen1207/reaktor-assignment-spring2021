@@ -1,10 +1,10 @@
 import {
   GET_PRODUCTS_SUCCESS,
   GET_AVAILABILITY_SUCCESS,
+  DECREASE_PRODUCT_AVAILABILITY_SUCCESS,
   ProductActions,
   ProductState,
   Product,
-  Response,
 } from "../type";
 
 const initialState: ProductState = {
@@ -42,13 +42,15 @@ export function product(
       };
 
     case GET_AVAILABILITY_SUCCESS:
-      const { productId, response } = action.payload;
-      const filteredRes: Response[] = response.filter(
-        (res) => res.id.toLowerCase() === productId
-      );
       return {
         ...state,
-        availability: filteredRes,
+        availability: [...state.availability, ...action.payload],
+      };
+
+    case DECREASE_PRODUCT_AVAILABILITY_SUCCESS:
+      return {
+        ...state,
+        availability: action.payload,
       };
 
     default:

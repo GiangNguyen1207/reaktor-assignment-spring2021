@@ -1,12 +1,19 @@
 import { takeEvery, put, call, fork } from "redux-saga/effects";
 
 import API from "services/api";
-import { getProductSuccess, getAvailabilitySuccess } from "redux/actions";
+import {
+  getProductSuccess,
+  getAvailabilitySuccess,
+  decreaseProductAvailabilitySuccess,
+} from "redux/actions";
 import {
   GET_PRODUCTS,
   GET_AVAILABILITY,
+  DECREASE_PRODUCT_AVAILABILITY,
   GetProductsAction,
   GetAvailabilityAction,
+  DecreaseProductAvailability,
+  Response,
 } from "redux/type";
 
 function* getProducts() {
@@ -26,11 +33,37 @@ function* getAvailability() {
     try {
       const { productId, manufacturer } = action.payload;
       const { response } = yield call(API.getManufacturer, manufacturer);
-      yield put(getAvailabilitySuccess(productId, response));
+      const res = yield response.filter(
+        (res: Response) => res.id.toLowerCase() === productId
+      );
+      yield put(getAvailabilitySuccess(res));
     } catch (error) {
       console.log(error);
     }
   });
 }
 
-export default [getProducts, getAvailability].map(fork);
+function* decreaseProductAvailability() {
+  yield takeEvery(DECREASE_PRODUCT_AVAILABILITY, function* (
+    action: DecreaseProductAvailability
+  ) {
+    try {
+      const { productId, availability } = action.payload;
+      const foundProduct = availability.find(
+        (p) => p.id.toLowerCase() === productId
+      );
+      if (foundProduct) {
+        const arr = availability;
+        const pos = availability.indexOf(foundProduct);
+        arr.splice(pos, 1);
+        yield put(decreaseProductAvailabilitySuccess(arr));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}
+
+export default [getProducts, getAvailability, decreaseProductAvailability].map(
+  fork
+);

@@ -1,37 +1,25 @@
-import React, { useState } from "react";
-import { Product, Response } from "redux/type";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { Product } from "redux/type";
 
-import { getAvailability } from "redux/actions";
 import Button from "components/Button";
+import { Response } from "redux/type";
 
 type Props = {
-  availability?: Response[];
   products?: Product[];
+  handleShowClick: (productId: string, manufacturer: string) => void;
+  handleHideClick: () => void;
+  availability: Response[];
 };
 
-const TableBody = ({ availability, products }: Props) => {
-  const dispatch = useDispatch();
-  const [isCLicked, setIsClicked] = useState({ numbers: [] as number[] });
-
-  const handleShowClick = (
-    productId: string,
-    manufacturer: string,
-    index: number
-  ) => {
-    dispatch(getAvailability(productId, manufacturer));
-    setIsClicked({ numbers: [...isCLicked.numbers].concat(index) });
-  };
-
-  const handleHideClick = (index: number) => {
-    const pos = isCLicked.numbers.indexOf(index);
-    isCLicked.numbers.splice(pos, 1);
-    setIsClicked({ numbers: isCLicked.numbers });
-  };
-
+const TableBody = ({
+  products,
+  handleShowClick,
+  handleHideClick,
+  availability,
+}: Props) => {
   return (
     <>
-      {products?.map((product, index) => {
+      {products?.map((product) => {
         return (
           <tr key={product.id}>
             <td>{product.name}</td>
@@ -40,23 +28,25 @@ const TableBody = ({ availability, products }: Props) => {
             <td>{product.price}</td>
             <td>{product.manufacturer}</td>
             <td>
-              {isCLicked.numbers.includes(index) && availability ? (
+              {availability
+                .map((p) => p.id.toLowerCase())
+                .includes(product.id) ? (
                 <>
                   <p
                     dangerouslySetInnerHTML={{
-                      __html: availability?.map((el) => el.DATAPAYLOAD)[0],
+                      __html:
+                        availability.find(
+                          (p) => p.id.toLowerCase() === product.id
+                        )?.DATAPAYLOAD || "Loading",
                     }}
                   />
-                  <Button
-                    label="Hide"
-                    handleClick={() => handleHideClick(index)}
-                  />
+                  <Button label="Hide" handleClick={() => handleHideClick()} />
                 </>
               ) : (
                 <Button
                   label="Show"
                   handleClick={() =>
-                    handleShowClick(product.id, product.manufacturer, index)
+                    handleShowClick(product.id, product.manufacturer)
                   }
                 />
               )}
