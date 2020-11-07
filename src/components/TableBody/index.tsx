@@ -2,13 +2,13 @@ import React from "react";
 import { Product } from "redux/type";
 
 import Button from "components/Button";
-import { Response } from "redux/type";
+import { Availability } from "redux/type";
 
 type Props = {
   products?: Product[];
   handleShowClick: (productId: string, manufacturer: string) => void;
   handleHideClick: (productId: string) => void;
-  availability: Response[];
+  availability: Availability[];
 };
 
 const TableBody = ({
@@ -37,7 +37,7 @@ const TableBody = ({
                       __html:
                         availability.find(
                           (p) => p.id.toLowerCase() === product.id
-                        )?.DATAPAYLOAD || "Loading",
+                        )?.DATAPAYLOAD || "",
                     }}
                   />
                   <Button

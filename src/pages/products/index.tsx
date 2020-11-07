@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 
 import useProduct from "hooks/useProduct";
@@ -9,11 +9,9 @@ import "./styles.scss";
 
 const Jackets = () => {
   const dispatch = useDispatch();
-  const [productId, setProductId] = useState<string>();
   const { jackets, shirts, accessories, availability } = useProduct();
 
   const handleShowClick = async (productId: string, manufacturer: string) => {
-    setProductId(productId);
     dispatch(getAvailability(productId, manufacturer));
   };
 

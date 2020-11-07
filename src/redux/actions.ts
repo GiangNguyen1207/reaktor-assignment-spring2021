@@ -7,7 +7,7 @@ import {
   DECREASE_PRODUCT_AVAILABILITY_SUCCESS,
   ProductActions,
   Product,
-  Response,
+  Availability,
 } from "./type";
 
 export function getProducts(category: string): ProductActions {
@@ -37,15 +37,17 @@ export function getAvailability(
   };
 }
 
-export function getAvailabilitySuccess(response: Response[]): ProductActions {
+export function getAvailabilitySuccess(
+  availability: Availability[]
+): ProductActions {
   return {
     type: GET_AVAILABILITY_SUCCESS,
-    payload: response,
+    payload: availability,
   };
 }
 
 export function decreaseProductAvailability(
-  availability: Response[],
+  availability: Availability[],
   productId?: string
 ): ProductActions {
   return {
@@ -58,7 +60,7 @@ export function decreaseProductAvailability(
 }
 
 export function decreaseProductAvailabilitySuccess(
-  availability: Response[]
+  availability: Availability[]
 ): ProductActions {
   return {
     type: DECREASE_PRODUCT_AVAILABILITY_SUCCESS,

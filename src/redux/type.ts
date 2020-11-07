@@ -15,7 +15,7 @@ export type Product = {
   manufacturer: string;
 };
 
-export type Response = {
+export type Availability = {
   id: string;
   DATAPAYLOAD: string;
 };
@@ -40,20 +40,20 @@ export type GetAvailabilityAction = {
 
 export type GetAvailabilitySucess = {
   type: typeof GET_AVAILABILITY_SUCCESS;
-  payload: Response[];
+  payload: Availability[];
 };
 
 export type DecreaseProductAvailability = {
   type: typeof DECREASE_PRODUCT_AVAILABILITY;
   payload: {
-    availability: Response[];
+    availability: Availability[];
     productId?: string;
   };
 };
 
 export type DecreaseProductAvailabilitySuccess = {
   type: typeof DECREASE_PRODUCT_AVAILABILITY_SUCCESS;
-  payload: Response[];
+  payload: Availability[];
 };
 
 export type ProductActions =
@@ -68,5 +68,5 @@ export type ProductState = {
   jackets?: Product[];
   shirts?: Product[];
   accessories?: Product[];
-  availability: Response[];
+  availability: Availability[];
 };

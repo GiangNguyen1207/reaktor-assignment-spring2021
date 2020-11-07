@@ -13,7 +13,7 @@ import {
   GetProductsAction,
   GetAvailabilityAction,
   DecreaseProductAvailability,
-  Response,
+  Availability,
 } from "redux/type";
 
 function* getProducts() {
@@ -33,8 +33,8 @@ function* getAvailability() {
     try {
       const { productId, manufacturer } = action.payload;
       const { response } = yield call(API.getManufacturer, manufacturer);
-      const res = yield response.filter(
-        (res: Response) => res.id.toLowerCase() === productId
+      const res = response.filter(
+        (res: Availability) => res.id.toLowerCase() === productId
       );
       yield put(getAvailabilitySuccess(res));
     } catch (error) {
