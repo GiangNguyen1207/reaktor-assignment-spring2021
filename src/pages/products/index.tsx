@@ -17,7 +17,7 @@ const Jackets = () => {
     dispatch(getAvailability(productId, manufacturer));
   };
 
-  const handleHideClick = () => {
+  const handleHideClick = (productId: string) => {
     dispatch(decreaseProductAvailability(availability, productId));
   };
 

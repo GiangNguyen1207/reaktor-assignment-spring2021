@@ -7,7 +7,7 @@ import { Response } from "redux/type";
 type Props = {
   products?: Product[];
   handleShowClick: (productId: string, manufacturer: string) => void;
-  handleHideClick: () => void;
+  handleHideClick: (productId: string) => void;
   availability: Response[];
 };
 
@@ -40,7 +40,10 @@ const TableBody = ({
                         )?.DATAPAYLOAD || "Loading",
                     }}
                   />
-                  <Button label="Hide" handleClick={() => handleHideClick()} />
+                  <Button
+                    label="Hide"
+                    handleClick={() => handleHideClick(product.id)}
+                  />
                 </>
               ) : (
                 <Button
