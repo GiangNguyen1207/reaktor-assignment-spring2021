@@ -1,60 +1,65 @@
-export const GET_PRODUCTS = "GET_PRODUCTS";
-export const GET_PRODUCTS_SUCCESS = "GET_PRODUCTS_SUCCESS";
-export const GET_AVAILABILITY = "GET_AVAILABILITY";
-export const GET_AVAILABILITY_SUCCESS = "GET_AVAILABILITY_SUCCESS";
-export const DECREASE_PRODUCT_AVAILABILITY = "DECREASE_PRODUCT_AVAILABILITY";
+export const GET_PRODUCTS = 'GET_PRODUCTS'
+export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS'
+export const GET_AVAILABILITY = 'GET_AVAILABILITY'
+export const GET_AVAILABILITY_SUCCESS = 'GET_AVAILABILITY_SUCCESS'
+export const DECREASE_PRODUCT_AVAILABILITY = 'DECREASE_PRODUCT_AVAILABILITY'
 export const DECREASE_PRODUCT_AVAILABILITY_SUCCESS =
-  "DECREASE_PRODUCT_AVAILABILITY_SUCCESS";
+  'DECREASE_PRODUCT_AVAILABILITY_SUCCESS'
 
 export type Product = {
-  id: string;
-  type: string;
-  name: string;
-  color: string;
-  price: number;
-  manufacturer: string;
-};
+  id: string
+  type: string
+  name: string
+  color: string
+  price: number
+  manufacturer: string
+}
 
 export type Availability = {
-  id: string;
-  DATAPAYLOAD: string;
-};
+  id: string
+  DATAPAYLOAD: string
+}
+
+export type AvailabilityData = {
+  manufacturer: string
+  data: Availability[]
+}
 
 export type GetProductsAction = {
-  type: typeof GET_PRODUCTS;
-  payload: string;
-};
+  type: typeof GET_PRODUCTS
+  payload: string
+}
 
 export type GetProductSuccessAction = {
-  type: typeof GET_PRODUCTS_SUCCESS;
-  payload: Product[];
-};
+  type: typeof GET_PRODUCTS_SUCCESS
+  payload: Product[]
+}
 
 export type GetAvailabilityAction = {
-  type: typeof GET_AVAILABILITY;
-  payload: {
-    productId: string;
-    manufacturer: string;
-  };
-};
+  type: typeof GET_AVAILABILITY
+  payload: string
+}
 
 export type GetAvailabilitySucess = {
-  type: typeof GET_AVAILABILITY_SUCCESS;
-  payload: Availability[];
-};
+  type: typeof GET_AVAILABILITY_SUCCESS
+  payload: {
+    manufacturer: string
+    availability: Availability[]
+  }
+}
 
 export type DecreaseProductAvailability = {
-  type: typeof DECREASE_PRODUCT_AVAILABILITY;
+  type: typeof DECREASE_PRODUCT_AVAILABILITY
   payload: {
-    availability: Availability[];
-    productId?: string;
-  };
-};
+    availability: Availability[]
+    productId?: string
+  }
+}
 
 export type DecreaseProductAvailabilitySuccess = {
-  type: typeof DECREASE_PRODUCT_AVAILABILITY_SUCCESS;
-  payload: Availability[];
-};
+  type: typeof DECREASE_PRODUCT_AVAILABILITY_SUCCESS
+  payload: Availability[]
+}
 
 export type ProductActions =
   | GetProductSuccessAction
@@ -62,11 +67,11 @@ export type ProductActions =
   | GetAvailabilityAction
   | GetAvailabilitySucess
   | DecreaseProductAvailability
-  | DecreaseProductAvailabilitySuccess;
+  | DecreaseProductAvailabilitySuccess
 
 export type ProductState = {
-  jackets?: Product[];
-  shirts?: Product[];
-  accessories?: Product[];
-  availability: Availability[];
-};
+  jackets: Product[]
+  shirts: Product[]
+  accessories: Product[]
+  availability: AvailabilityData[]
+}

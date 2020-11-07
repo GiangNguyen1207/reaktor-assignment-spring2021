@@ -8,42 +8,40 @@ import {
   ProductActions,
   Product,
   Availability,
-} from "./type";
+} from './type'
 
 export function getProducts(category: string): ProductActions {
   return {
     type: GET_PRODUCTS,
     payload: category,
-  };
+  }
 }
 
 export function getProductSuccess(products: Product[]): ProductActions {
   return {
     type: GET_PRODUCTS_SUCCESS,
     payload: products,
-  };
+  }
 }
 
-export function getAvailability(
-  productId: string,
-  manufacturer: string
-): ProductActions {
+export function getAvailability(manufacturer: string): ProductActions {
   return {
     type: GET_AVAILABILITY,
-    payload: {
-      productId,
-      manufacturer,
-    },
-  };
+    payload: manufacturer,
+  }
 }
 
 export function getAvailabilitySuccess(
+  manufacturer: string,
   availability: Availability[]
 ): ProductActions {
   return {
     type: GET_AVAILABILITY_SUCCESS,
-    payload: availability,
-  };
+    payload: {
+      manufacturer,
+      availability,
+    },
+  }
 }
 
 export function decreaseProductAvailability(
@@ -56,7 +54,7 @@ export function decreaseProductAvailability(
       productId,
       availability,
     },
-  };
+  }
 }
 
 export function decreaseProductAvailabilitySuccess(
@@ -65,5 +63,5 @@ export function decreaseProductAvailabilitySuccess(
   return {
     type: DECREASE_PRODUCT_AVAILABILITY_SUCCESS,
     payload: availability,
-  };
+  }
 }

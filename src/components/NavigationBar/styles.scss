@@ -1,3 +1,9 @@
+.navigation {
+  background: #321f28;
+  color: #f6f6f6;
+  text-transform: uppercase;
+}
+
 .nav-list {
   margin: 0;
   padding: 0;
@@ -8,6 +14,7 @@
 
   &__item {
     padding: 15px;
+
     &:hover {
       cursor: pointer;
       background: #e79e4f;

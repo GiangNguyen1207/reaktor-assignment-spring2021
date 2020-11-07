@@ -1,21 +1,21 @@
-import React from "react";
-import { Product } from "redux/type";
+import React from 'react'
+import { Product } from 'redux/type'
 
-import Button from "components/Button";
-import { Availability } from "redux/type";
+import Button from 'components/Button'
+import { Availability, AvailabilityData } from 'redux/type'
 
 type Props = {
-  products?: Product[];
-  handleShowClick: (productId: string, manufacturer: string) => void;
-  handleHideClick: (productId: string) => void;
-  availability: Availability[];
-};
+  products?: Product[]
+  handleShowClick: (productId: string, manufacturer: string) => void
+  handleHideClick: (productId: string) => void
+  pAvailability: Availability[]
+}
 
 const TableBody = ({
   products,
   handleShowClick,
   handleHideClick,
-  availability,
+  pAvailability,
 }: Props) => {
   return (
     <>
@@ -28,16 +28,17 @@ const TableBody = ({
             <td>{product.price}</td>
             <td>{product.manufacturer}</td>
             <td>
-              {availability
+              {pAvailability
                 .map((p) => p.id.toLowerCase())
                 .includes(product.id) ? (
                 <>
                   <p
                     dangerouslySetInnerHTML={{
                       __html:
-                        availability.find(
-                          (p) => p.id.toLowerCase() === product.id
-                        )?.DATAPAYLOAD || "",
+                        pAvailability.find(
+                          (el) => el.id.toLowerCase() === product.id
+                        )?.DATAPAYLOAD || '',
+                      //pAvailability.map((el) => el.DATAPAYLOAD)[0] || '',
                     }}
                   />
                   <Button
@@ -55,10 +56,10 @@ const TableBody = ({
               )}
             </td>
           </tr>
-        );
+        )
       })}
     </>
-  );
-};
+  )
+}
 
-export default TableBody;
+export default TableBody

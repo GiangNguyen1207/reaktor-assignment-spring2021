@@ -1,32 +1,25 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import createSagaMiddleware from "redux-saga";
+import { createStore, applyMiddleware, compose } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 
-import rootSaga from "redux/saga";
-import rootReducer, { RootState } from "./reducer";
+import rootSaga from 'redux/saga'
+import rootReducer, { RootState } from './reducer'
 
 const initialState: RootState = {
   product: {
-    jackets: undefined,
-    shirts: undefined,
-    accessories: undefined,
+    jackets: [],
+    shirts: [],
+    accessories: [],
     availability: [],
   },
-};
+}
 
 export default function makeStore() {
-  /*let initialState;
-  const loadedState = localStorage.getItem('state')
+  const sagaMiddleware = createSagaMiddleware()
+  let composeEnhancers = compose
 
-  if(loadedState !== null) {
-    initialState = JSON.parse(loadedState)
-  } else initialState = initialState*/
-
-  const sagaMiddleware = createSagaMiddleware();
-  let composeEnhancers = compose;
-
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === 'development') {
     if ((window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
-      composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+      composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     }
   }
 
@@ -34,9 +27,9 @@ export default function makeStore() {
     rootReducer,
     initialState,
     composeEnhancers(applyMiddleware(sagaMiddleware))
-  );
+  )
 
-  sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga)
 
-  return store;
+  return store
 }

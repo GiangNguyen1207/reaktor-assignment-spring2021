@@ -5,14 +5,15 @@ import {
   ProductActions,
   ProductState,
   Product,
-} from "../type";
+  AvailabilityData,
+} from '../type'
 
 const initialState: ProductState = {
-  jackets: undefined,
-  shirts: undefined,
-  accessories: undefined,
+  jackets: [],
+  shirts: [],
+  accessories: [],
   availability: [],
-};
+}
 
 export function product(
   state: ProductState = initialState,
@@ -20,40 +21,46 @@ export function product(
 ): ProductState {
   switch (action.type) {
     case GET_PRODUCTS_SUCCESS:
-      const products = action.payload;
+      const products = action.payload
 
-      if (products.map((p: Product) => p.type).includes("jackets")) {
+      if (products.map((p: Product) => p.type).includes('jackets')) {
         return {
           ...state,
           jackets: action.payload,
-        };
+        }
       }
 
-      if (products.map((p: Product) => p.type).includes("shirts")) {
+      if (products.map((p: Product) => p.type).includes('shirts')) {
         return {
           ...state,
           shirts: action.payload,
-        };
+        }
       }
 
       return {
         ...state,
         accessories: action.payload,
-      };
+      }
 
     case GET_AVAILABILITY_SUCCESS:
+      const avail: AvailabilityData[] = [
+        {
+          manufacturer: action.payload.manufacturer,
+          data: action.payload.availability,
+        },
+      ]
       return {
         ...state,
-        availability: [...state.availability, ...action.payload],
-      };
+        availability: [...state.availability, ...avail],
+      }
 
-    case DECREASE_PRODUCT_AVAILABILITY_SUCCESS:
-      return {
-        ...state,
-        availability: action.payload,
-      };
+    // case DECREASE_PRODUCT_AVAILABILITY_SUCCESS:
+    //   return {
+    //     ...state,
+    //     availability: action.payload,
+    //   }
 
     default:
-      return state;
+      return state
   }
 }

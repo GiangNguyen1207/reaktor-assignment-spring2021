@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
+
+import './styles.scss'
 
 const Header = () => {
-  return <div>Warehouse</div>;
-};
+  return <div className="header">Warehouse</div>
+}
 
-export default Header;
+export default Header
