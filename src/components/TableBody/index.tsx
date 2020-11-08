@@ -2,24 +2,22 @@ import React from 'react'
 import { Product } from 'redux/type'
 
 import Button from 'components/Button'
-import { Availability, AvailabilityData } from 'redux/type'
+import { Availability } from 'redux/type'
 
-type Props = {
-  products?: Product[]
+type TableBodyProps = {
+  products: Product[]
   handleShowClick: (productId: string, manufacturer: string) => void
-  handleHideClick: (productId: string) => void
   pAvailability: Availability[]
 }
 
 const TableBody = ({
   products,
   handleShowClick,
-  handleHideClick,
   pAvailability,
-}: Props) => {
+}: TableBodyProps) => {
   return (
     <>
-      {products?.map((product) => {
+      {products.map((product) => {
         return (
           <tr key={product.id}>
             <td>{product.name}</td>
@@ -31,27 +29,17 @@ const TableBody = ({
               {pAvailability
                 .map((p) => p.id.toLowerCase())
                 .includes(product.id) ? (
-                <>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        pAvailability.find(
-                          (el) => el.id.toLowerCase() === product.id
-                        )?.DATAPAYLOAD || '',
-                      //pAvailability.map((el) => el.DATAPAYLOAD)[0] || '',
-                    }}
-                  />
-                  <Button
-                    label="Hide"
-                    handleClick={() => handleHideClick(product.id)}
-                  />
-                </>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: pAvailability.map((p) => p.DATAPAYLOAD)[0] || '',
+                  }}
+                />
               ) : (
                 <Button
                   label="Show"
-                  handleClick={() =>
+                  handleClick={() => {
                     handleShowClick(product.id, product.manufacturer)
-                  }
+                  }}
                 />
               )}
             </td>
@@ -63,3 +51,5 @@ const TableBody = ({
 }
 
 export default TableBody
+
+TableBody.displayName = 'TableBody'

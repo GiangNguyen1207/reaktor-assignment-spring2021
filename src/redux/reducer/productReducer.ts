@@ -22,14 +22,12 @@ export function product(
   switch (action.type) {
     case GET_PRODUCTS_SUCCESS:
       const products = action.payload
-
       if (products.map((p: Product) => p.type).includes('jackets')) {
         return {
           ...state,
           jackets: action.payload,
         }
       }
-
       if (products.map((p: Product) => p.type).includes('shirts')) {
         return {
           ...state,

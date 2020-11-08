@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import useProduct from 'hooks/useProduct'
 import TableHeader from 'components/TableHeader'
 import TableBody from 'components/TableBody'
-import { getAvailability, decreaseProductAvailability } from 'redux/actions'
+import { getAvailability } from 'redux/actions'
 import './styles.scss'
 
 const Jackets = () => {
@@ -27,10 +27,6 @@ const Jackets = () => {
     }
   }
 
-  const handleHideClick = (productId: string) => {
-    //dispatch(decreaseProductAvailability(availability, productId))
-  }
-
   return (
     <table className="table">
       <thead>
@@ -39,14 +35,13 @@ const Jackets = () => {
       <tbody>
         <TableBody
           products={
-            location.pathname === '/'
+            location.pathname === '/jackets'
               ? jackets
               : location.pathname === '/shirts'
               ? shirts
               : accessories
           }
           handleShowClick={handleShowClick}
-          handleHideClick={handleHideClick}
           pAvailability={pAvailability}
         />
       </tbody>

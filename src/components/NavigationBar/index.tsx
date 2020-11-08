@@ -5,22 +5,20 @@ import { useHistory } from 'react-router-dom'
 import { getProducts } from 'redux/actions'
 import './styles.scss'
 
-const NavigationBar = () => {
+const NavigationBar: React.FC = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const categories = ['jackets', 'shirts', 'accessories']
 
   const handleClick = (category: string) => {
-    if (category === 'jackets') {
-      history.push('/')
-    } else history.push(`/${category}`)
+    history.push(`/${category}`)
     dispatch(getProducts(category))
   }
 
   return (
     <div className="navigation">
       <ul className="nav-list">
-        {categories.map((cat) => {
+        {categories.map((cat: string) => {
           return (
             <li
               className="nav-list__item"
@@ -37,3 +35,5 @@ const NavigationBar = () => {
 }
 
 export default NavigationBar
+
+NavigationBar.displayName = 'NavigationBar'

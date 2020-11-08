@@ -20,6 +20,7 @@ function* getProducts() {
     try {
       const category = action.payload
       const products = yield call(API.getProduct, category)
+
       yield put(getProductSuccess(products))
     } catch (error) {
       console.log(error)
@@ -32,9 +33,7 @@ function* getAvailability() {
     try {
       const manufacturer = action.payload
       const { response } = yield call(API.getManufacturer, manufacturer)
-      // const res = response.filter(
-      //   (res: Availability) => res.id.toLowerCase() === productId
-      // );
+
       yield put(getAvailabilitySuccess(manufacturer, response))
     } catch (error) {
       console.log(error)
