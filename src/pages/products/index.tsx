@@ -6,7 +6,7 @@ import TableBody from 'components/TableBody'
 import './styles.scss'
 
 const Jackets = () => {
-  const path = location.pathname
+  const path = location.pathname.substr(1)
   const { jackets, shirts, accessories, availability } = useProduct(path)
 
   return (

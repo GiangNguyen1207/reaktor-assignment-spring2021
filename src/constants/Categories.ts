@@ -1,5 +1,5 @@
 export default {
-  jackets: 'jackets',
-  shirts: 'shirts',
-  accesssories: 'accessories',
+  pJackets: 'jackets',
+  pShirts: 'shirts',
+  pAccesssories: 'accessories',
 }
