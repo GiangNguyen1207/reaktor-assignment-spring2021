@@ -6,7 +6,8 @@ import TableBody from 'components/TableBody'
 import './styles.scss'
 
 const Jackets = () => {
-  const { jackets, shirts, accessories, availability } = useProduct()
+  const path = location.pathname
+  const { jackets, shirts, accessories, availability } = useProduct(path)
 
   return (
     <table className="table">

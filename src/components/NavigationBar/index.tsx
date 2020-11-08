@@ -1,18 +1,13 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-
-import { getProducts } from 'redux/actions'
 import './styles.scss'
 
 const NavigationBar: React.FC = () => {
-  const dispatch = useDispatch()
   const history = useHistory()
   const categories = ['jackets', 'shirts', 'accessories']
 
   const handleClick = (category: string) => {
     history.push(`/${category}`)
-    dispatch(getProducts(category))
   }
 
   return (
