@@ -1,7 +1,8 @@
 import {
   GET_PRODUCTS_SUCCESS,
   GET_AVAILABILITY_SUCCESS,
-  DECREASE_PRODUCT_AVAILABILITY_SUCCESS,
+  SHOW_NOTIFICATION,
+  HIDE_NOTIFICATION,
   ProductActions,
   ProductState,
   Product,
@@ -13,6 +14,7 @@ const initialState: ProductState = {
   shirts: [],
   accessories: [],
   availability: [],
+  notification: null,
 }
 
 export function product(
@@ -52,11 +54,17 @@ export function product(
         availability: [...state.availability, ...avail],
       }
 
-    // case DECREASE_PRODUCT_AVAILABILITY_SUCCESS:
-    //   return {
-    //     ...state,
-    //     availability: action.payload,
-    //   }
+    case SHOW_NOTIFICATION:
+      return {
+        ...state,
+        notification: action.payload,
+      }
+
+    case HIDE_NOTIFICATION:
+      return {
+        ...state,
+        notification: null,
+      }
 
     default:
       return state

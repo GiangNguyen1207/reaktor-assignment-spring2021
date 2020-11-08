@@ -10,6 +10,7 @@ const initialState: RootState = {
     shirts: [],
     accessories: [],
     availability: [],
+    notification: null,
   },
 }
 

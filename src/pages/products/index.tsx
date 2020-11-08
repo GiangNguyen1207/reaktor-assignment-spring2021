@@ -1,31 +1,12 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 
 import useProduct from 'hooks/useProduct'
 import TableHeader from 'components/TableHeader'
 import TableBody from 'components/TableBody'
-import { getAvailability } from 'redux/actions'
 import './styles.scss'
 
 const Jackets = () => {
-  const dispatch = useDispatch()
-  const [id, setId] = useState<string>('')
-  const [manufacturer, setManufacturer] = useState<string>('')
-  const {
-    jackets,
-    shirts,
-    accessories,
-    manufacturerList,
-    pAvailability,
-  } = useProduct(id, manufacturer)
-
-  const handleShowClick = (productId: string, manufacturer: string) => {
-    setId(productId)
-    setManufacturer(manufacturer)
-    if (!manufacturerList.includes(manufacturer)) {
-      dispatch(getAvailability(manufacturer))
-    }
-  }
+  const { jackets, shirts, accessories, availability } = useProduct()
 
   return (
     <table className="table">
@@ -41,8 +22,7 @@ const Jackets = () => {
               ? shirts
               : accessories
           }
-          handleShowClick={handleShowClick}
-          pAvailability={pAvailability}
+          availability={availability}
         />
       </tbody>
     </table>

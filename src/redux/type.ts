@@ -1,10 +1,8 @@
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS'
-export const GET_AVAILABILITY = 'GET_AVAILABILITY'
 export const GET_AVAILABILITY_SUCCESS = 'GET_AVAILABILITY_SUCCESS'
-export const DECREASE_PRODUCT_AVAILABILITY = 'DECREASE_PRODUCT_AVAILABILITY'
-export const DECREASE_PRODUCT_AVAILABILITY_SUCCESS =
-  'DECREASE_PRODUCT_AVAILABILITY_SUCCESS'
+export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION'
+export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION'
 
 export type Product = {
   id: string
@@ -35,11 +33,6 @@ export type GetProductSuccessAction = {
   payload: Product[]
 }
 
-export type GetAvailabilityAction = {
-  type: typeof GET_AVAILABILITY
-  payload: string
-}
-
 export type GetAvailabilitySucess = {
   type: typeof GET_AVAILABILITY_SUCCESS
   payload: {
@@ -48,30 +41,26 @@ export type GetAvailabilitySucess = {
   }
 }
 
-export type DecreaseProductAvailability = {
-  type: typeof DECREASE_PRODUCT_AVAILABILITY
-  payload: {
-    availability: Availability[]
-    productId?: string
-  }
+export type ShowNotification = {
+  type: typeof SHOW_NOTIFICATION
+  payload: string
 }
 
-export type DecreaseProductAvailabilitySuccess = {
-  type: typeof DECREASE_PRODUCT_AVAILABILITY_SUCCESS
-  payload: Availability[]
+export type HideNotificaiton = {
+  type: typeof HIDE_NOTIFICATION
 }
 
 export type ProductActions =
   | GetProductSuccessAction
   | GetProductsAction
-  | GetAvailabilityAction
   | GetAvailabilitySucess
-  | DecreaseProductAvailability
-  | DecreaseProductAvailabilitySuccess
+  | ShowNotification
+  | HideNotificaiton
 
 export type ProductState = {
   jackets: Product[]
   shirts: Product[]
   accessories: Product[]
   availability: AvailabilityData[]
+  notification: string | null
 }

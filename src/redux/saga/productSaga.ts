@@ -1,67 +1,58 @@
-import { takeEvery, put, call, fork } from 'redux-saga/effects'
+import { takeEvery, put, call, fork, select } from 'redux-saga/effects'
 
 import API from 'services/api'
 import {
   getProductSuccess,
   getAvailabilitySuccess,
-  decreaseProductAvailabilitySuccess,
+  showNotification,
 } from 'redux/actions'
 import {
   GET_PRODUCTS,
-  GET_AVAILABILITY,
-  DECREASE_PRODUCT_AVAILABILITY,
+  SHOW_NOTIFICATION,
   GetProductsAction,
-  GetAvailabilityAction,
-  DecreaseProductAvailability,
+  Product,
 } from 'redux/type'
+import { RootState } from 'redux/reducer'
+
+function* showError(error: any) {
+  yield takeEvery(SHOW_NOTIFICATION, function* () {
+    const message = error.response.data.message || error.message
+    yield put(showNotification(message))
+  })
+}
 
 function* getProducts() {
   yield takeEvery(GET_PRODUCTS, function* (action: GetProductsAction) {
     try {
       const category = action.payload
-      const products = yield call(API.getProduct, category)
+      const state: RootState = yield select()
+      const localMan = state.product.availability.map((man) => man.manufacturer)
+      const products: Product[] = yield call(API.getProduct, category)
 
       yield put(getProductSuccess(products))
-    } catch (error) {
-      console.log(error)
-    }
-  })
-}
 
-function* getAvailability() {
-  yield takeEvery(GET_AVAILABILITY, function* (action: GetAvailabilityAction) {
-    try {
-      const manufacturer = action.payload
-      const { response } = yield call(API.getManufacturer, manufacturer)
-
-      yield put(getAvailabilitySuccess(manufacturer, response))
-    } catch (error) {
-      console.log(error)
-    }
-  })
-}
-
-function* decreaseProductAvailability() {
-  yield takeEvery(DECREASE_PRODUCT_AVAILABILITY, function* (
-    action: DecreaseProductAvailability
-  ) {
-    try {
-      const { productId, availability } = action.payload
-      const foundProduct = availability.find(
-        (p) => p.id.toLowerCase() === productId
+      const manufacturerList = Array.from(
+        new Set(products.map((p) => p.manufacturer))
       )
-      if (foundProduct) {
-        const arr = availability
-        const pos = availability.indexOf(foundProduct)
-        arr.splice(pos, 1)
-        yield put(decreaseProductAvailabilitySuccess(arr))
+      for (const manufacturer of manufacturerList) {
+        if (!localMan.includes(manufacturer)) {
+          yield getAvailability(manufacturer)
+        }
       }
     } catch (error) {
-      console.log(error)
+      yield showError(error)
     }
   })
 }
 
-export default [getProducts, getAvailability, decreaseProductAvailability].map(
-  fork
-)
+function* getAvailability(manufacturer: string) {
+  try {
+    const { response } = yield call(API.getManufacturer, manufacturer)
+
+    yield put(getAvailabilitySuccess(manufacturer, response))
+  } catch (error) {
+    yield showError(error)
+  }
+}
+
+export default [getProducts, getAvailability].map(fork)

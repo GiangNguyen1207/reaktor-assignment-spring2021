@@ -1,10 +1,9 @@
 import {
   GET_PRODUCTS,
   GET_PRODUCTS_SUCCESS,
-  GET_AVAILABILITY,
   GET_AVAILABILITY_SUCCESS,
-  DECREASE_PRODUCT_AVAILABILITY,
-  DECREASE_PRODUCT_AVAILABILITY_SUCCESS,
+  SHOW_NOTIFICATION,
+  HIDE_NOTIFICATION,
   ProductActions,
   Product,
   Availability,
@@ -24,13 +23,6 @@ export function getProductSuccess(products: Product[]): ProductActions {
   }
 }
 
-export function getAvailability(manufacturer: string): ProductActions {
-  return {
-    type: GET_AVAILABILITY,
-    payload: manufacturer,
-  }
-}
-
 export function getAvailabilitySuccess(
   manufacturer: string,
   availability: Availability[]
@@ -44,24 +36,15 @@ export function getAvailabilitySuccess(
   }
 }
 
-export function decreaseProductAvailability(
-  availability: Availability[],
-  productId?: string
-): ProductActions {
+export function showNotification(noti: string): ProductActions {
   return {
-    type: DECREASE_PRODUCT_AVAILABILITY,
-    payload: {
-      productId,
-      availability,
-    },
+    type: SHOW_NOTIFICATION,
+    payload: noti,
   }
 }
 
-export function decreaseProductAvailabilitySuccess(
-  availability: Availability[]
-): ProductActions {
+export function hideNotification(): ProductActions {
   return {
-    type: DECREASE_PRODUCT_AVAILABILITY_SUCCESS,
-    payload: availability,
+    type: HIDE_NOTIFICATION,
   }
 }

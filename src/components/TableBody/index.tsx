@@ -1,20 +1,12 @@
 import React from 'react'
-import { Product } from 'redux/type'
-
-import Button from 'components/Button'
-import { Availability } from 'redux/type'
+import { Product, AvailabilityData } from 'redux/type'
 
 type TableBodyProps = {
   products: Product[]
-  handleShowClick: (productId: string, manufacturer: string) => void
-  pAvailability: Availability[]
+  availability: AvailabilityData[]
 }
 
-const TableBody = ({
-  products,
-  handleShowClick,
-  pAvailability,
-}: TableBodyProps) => {
+const TableBody = ({ products, availability }: TableBodyProps) => {
   return (
     <>
       {products.map((product) => {
@@ -25,24 +17,15 @@ const TableBody = ({
             <td>{product.color}</td>
             <td>{product.price}</td>
             <td>{product.manufacturer}</td>
-            <td>
-              {pAvailability
-                .map((p) => p.id.toLowerCase())
-                .includes(product.id) ? (
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: pAvailability.map((p) => p.DATAPAYLOAD)[0] || '',
-                  }}
-                />
-              ) : (
-                <Button
-                  label="Show"
-                  handleClick={() => {
-                    handleShowClick(product.id, product.manufacturer)
-                  }}
-                />
-              )}
-            </td>
+            <td
+              dangerouslySetInnerHTML={{
+                __html:
+                  availability
+                    .find((man) => man.manufacturer === product.manufacturer)
+                    ?.data.find((p) => p.id.toLowerCase() === product.id)
+                    ?.DATAPAYLOAD || 'Loading...',
+              }}
+            />
           </tr>
         )
       })}
