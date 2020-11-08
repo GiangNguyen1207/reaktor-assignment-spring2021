@@ -25,8 +25,6 @@ function* getProducts() {
   yield takeEvery(GET_PRODUCTS, function* (action: GetProductsAction) {
     try {
       const category = action.payload
-      const state: RootState = yield select()
-      const localMan = state.product.availability.map((man) => man.manufacturer)
       const products: Product[] = yield call(API.getProduct, category)
 
       yield put(getProductSuccess(products))
@@ -35,7 +33,13 @@ function* getProducts() {
         new Set(products.map((p) => p.manufacturer))
       )
       for (const manufacturer of manufacturerList) {
-        if (!localMan.includes(manufacturer)) {
+        const state: RootState = yield select()
+        const localMan = state.product.availability.map(
+          (man) => man.manufacturer
+        )
+        const found = localMan.find((man) => man === manufacturer)
+        if (!found) {
+          console.log('in')
           yield getAvailability(manufacturer)
         }
       }
