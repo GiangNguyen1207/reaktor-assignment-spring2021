@@ -6,8 +6,8 @@ import { getProducts } from 'redux/actions'
 import Categories from 'constants/Categories'
 
 export default function useProduct(path: string) {
-  const { pJackets, pShirts, pAccesssories } = Categories
   const dispatch = useDispatch()
+  const { pJackets, pShirts, pAccesssories } = Categories
   const { jackets, shirts, accessories, availability } = useSelector(
     (state: RootState) => ({
       jackets: state.product.jackets,

@@ -39,7 +39,6 @@ function* getProducts() {
         )
         const found = localMan.find((man) => man === manufacturer)
         if (!found) {
-          console.log('in')
           yield getAvailability(manufacturer)
         }
       }
