@@ -1,4 +1,11 @@
-import { takeEvery, put, call, fork, select } from 'redux-saga/effects'
+import {
+  takeEvery,
+  takeLatest,
+  put,
+  call,
+  fork,
+  select,
+} from 'redux-saga/effects'
 
 import API from 'services/api'
 import {
@@ -22,7 +29,7 @@ function* showError(error: any) {
 }
 
 function* getProducts() {
-  yield takeEvery(GET_PRODUCTS, function* (action: GetProductsAction) {
+  yield takeLatest(GET_PRODUCTS, function* (action: GetProductsAction) {
     try {
       const category = action.payload
       const products: Product[] = yield call(API.getProduct, category)

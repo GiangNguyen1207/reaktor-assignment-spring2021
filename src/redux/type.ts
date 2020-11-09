@@ -23,6 +23,11 @@ export type AvailabilityData = {
   data: Availability[]
 }
 
+export type TimeOut = {
+  category: string
+  startingTime: number
+}
+
 export type GetProductsAction = {
   type: typeof GET_PRODUCTS
   payload: string

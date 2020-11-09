@@ -1,4 +1,6 @@
 import React from 'react'
+import { isEmpty } from 'lodash'
+
 import { Product, AvailabilityData } from 'redux/type'
 
 type TableBodyProps = {
@@ -19,11 +21,12 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
             <td>{product.manufacturer}</td>
             <td
               dangerouslySetInnerHTML={{
-                __html:
-                  availability
-                    .find((man) => man.manufacturer === product.manufacturer)
-                    ?.data.find((p) => p.id.toLowerCase() === product.id)
-                    ?.DATAPAYLOAD || 'Loading...',
+                __html: !isEmpty(availability)
+                  ? availability
+                      .find((man) => man.manufacturer === product.manufacturer)
+                      ?.data.find((p) => p.id.toLowerCase() === product.id)
+                      ?.DATAPAYLOAD || 'Loading...'
+                  : '',
               }}
             />
           </tr>
