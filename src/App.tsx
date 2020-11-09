@@ -14,7 +14,7 @@ function App() {
     <>
       <Header />
       <NavigationBar />
-      <Notification message={message} />
+      <Notification toggleNoti={message ? true : false} message={message} />
       <Routes />
     </>
   )

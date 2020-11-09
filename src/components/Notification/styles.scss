@@ -1,0 +1,14 @@
+.noti {
+  display: none;
+  width: 100%;
+  position: fixed;
+  top: 65px;
+  bottom: 700px;
+  left: 0;
+  color: #f6f6f6;
+  background: #ef233c;
+
+  &--show {
+    display: block;
+  }
+}

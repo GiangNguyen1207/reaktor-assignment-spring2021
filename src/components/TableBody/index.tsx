@@ -19,16 +19,21 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
             <td>{product.color}</td>
             <td>{product.price}</td>
             <td>{product.manufacturer}</td>
-            <td
-              dangerouslySetInnerHTML={{
-                __html: !isEmpty(availability)
-                  ? availability
+            {availability.find(
+              (man) => man.manufacturer === product.manufacturer
+            ) ? (
+              <td
+                dangerouslySetInnerHTML={{
+                  __html:
+                    availability
                       .find((man) => man.manufacturer === product.manufacturer)
                       ?.data.find((p) => p.id.toLowerCase() === product.id)
-                      ?.DATAPAYLOAD || 'Loading...'
-                  : '',
-              }}
-            />
+                      ?.DATAPAYLOAD || '',
+                }}
+              />
+            ) : (
+              <td>Loading...</td>
+            )}
           </tr>
         )
       })}
