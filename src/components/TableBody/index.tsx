@@ -1,5 +1,4 @@
 import React from 'react'
-import { isEmpty } from 'lodash'
 
 import { Product, AvailabilityData } from 'redux/type'
 

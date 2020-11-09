@@ -1,14 +1,29 @@
 .noti {
   display: none;
-  width: 100%;
+  width: 35%;
   position: fixed;
-  top: 65px;
-  bottom: 700px;
-  left: 0;
+  top: 8%;
+  bottom: 87%;
+  left: 65%;
   color: #f6f6f6;
   background: #ef233c;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  animation: slideIn 0.5s ease;
 
   &--show {
     display: block;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(500px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

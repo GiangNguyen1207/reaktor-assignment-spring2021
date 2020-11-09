@@ -11,7 +11,7 @@ const Notification: React.FC<NotiProps> = ({
   message,
 }: NotiProps) => {
   return (
-    <div className={`noti noti-${toggleNoti ? 'show' : ''}`}>{message}</div>
+    <div className={`noti noti-${toggleNoti ? 'show' : 'hide'}`}>{message}</div>
   )
 }
 
