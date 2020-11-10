@@ -1,11 +1,17 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'redux/reducer'
+import _orderBy from 'lodash/orderBy'
 
+import { RootState } from 'redux/reducer'
 import { getProducts } from 'redux/actions'
 import Categories from 'constants/Categories'
+import { Product } from 'redux/type'
 
-export default function useProduct(path: string) {
+export default function useProduct(
+  category: string,
+  tableHeader: string,
+  isSorted: boolean
+) {
   const dispatch = useDispatch()
   const { pJackets, pShirts, pAccesssories } = Categories
   const { jackets, shirts, accessories, availability } = useSelector(
@@ -19,18 +25,29 @@ export default function useProduct(path: string) {
 
   useEffect(() => {
     if (
-      (path === `${pJackets}` && jackets.length === 0) ||
-      (path === `${pShirts}` && shirts.length === 0) ||
-      (path === `${pAccesssories}` && accessories.length === 0)
+      (category === `${pJackets}` && jackets.length === 0) ||
+      (category === `${pShirts}` && shirts.length === 0) ||
+      (category === `${pAccesssories}` && accessories.length === 0)
     ) {
-      dispatch(getProducts(path))
+      dispatch(getProducts(category))
     }
-  }, [dispatch, path])
+  }, [dispatch, category])
+
+  const sortedProducts: Product[] = _orderBy(
+    category === pJackets
+      ? jackets
+      : category === pShirts
+      ? shirts
+      : accessories,
+    [tableHeader],
+    [isSorted ? 'asc' : 'desc']
+  )
 
   return {
     jackets,
     shirts,
     accessories,
     availability,
+    sortedProducts,
   }
 }

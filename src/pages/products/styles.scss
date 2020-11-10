@@ -13,9 +13,10 @@ td {
 th,
 td {
   padding: 10px;
-  text-align: left
+  text-align: left;
 }
 
 th {
   text-transform: capitalize;
+  cursor: pointer;
 }

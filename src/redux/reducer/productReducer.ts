@@ -46,16 +46,6 @@ export function product(
         ...state,
         availability: { ...state.availability, ...action.payload },
       }
-    // const avail: AvailabilityData[] = [
-    //   {
-    //     manufacturer: action.payload.manufacturer,
-    //     data: action.payload.availability,
-    //   },
-    // ]
-    // return {
-    //   ...state,
-    //   availability: [...state.availability, ...avail],
-    // }
 
     case SHOW_NOTIFICATION:
       return {

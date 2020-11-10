@@ -1,30 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import useProduct from 'hooks/useProduct'
 import TableHeader from 'components/TableHeader'
 import TableBody from 'components/TableBody'
+
 import './styles.scss'
 
 const Jackets = () => {
-  const path = location.pathname.substr(1)
-  const { jackets, shirts, accessories, availability } = useProduct(path)
+  const category = location.pathname.substr(1)
+  const [isSorted, setIsSorted] = useState<boolean>(true)
+  const [tableHeader, setTableHeader] = useState<string>('name')
+  const { availability, sortedProducts } = useProduct(
+    category,
+    tableHeader,
+    isSorted
+  )
+  const tHeaders = [
+    'name',
+    'type',
+    'color',
+    'price',
+    'manufacturer',
+    'availability',
+  ]
+
+  const handleClick = (tableHeader: string) => {
+    setTableHeader(tableHeader)
+    setIsSorted(!isSorted)
+  }
 
   return (
     <table className="table">
       <thead>
-        <TableHeader />
+        <TableHeader
+          tHeaders={tHeaders}
+          handleClick={handleClick}
+          isSorted={isSorted}
+          tableHeader={tableHeader}
+        />
       </thead>
       <tbody>
-        <TableBody
-          products={
-            location.pathname === '/jackets'
-              ? jackets
-              : location.pathname === '/shirts'
-              ? shirts
-              : accessories
-          }
-          availability={availability}
-        />
+        <TableBody products={sortedProducts} availability={availability} />
       </tbody>
     </table>
   )
