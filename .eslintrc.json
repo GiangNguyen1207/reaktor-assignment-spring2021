@@ -1,6 +1,6 @@
 {
-  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "linebreak-style": ["error", "unix"],
     "@typescript-eslint/explicit-module-boundary-types": "off",
