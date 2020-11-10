@@ -6,7 +6,13 @@ import {
   getAvailabilitySuccess,
   showNotification,
 } from 'redux/actions'
-import { GET_PRODUCTS, GetProductsAction, Product } from 'redux/type'
+import {
+  GET_PRODUCTS,
+  GetProductsAction,
+  Product,
+  Availability,
+  AvailabilityData,
+} from 'redux/type'
 import { RootState } from 'redux/reducer'
 
 function* showError(error: any) {
@@ -18,13 +24,16 @@ function* getProducts() {
   yield takeLatest(GET_PRODUCTS, function* (action: GetProductsAction) {
     try {
       const category = action.payload
-      //axios.defaults.headers.common['x-force-error-mode'] = 'all'
+      // axios.defaults.headers.common['x-force-error-mode'] = 'all'
       const products: Product[] = yield call(API.getProduct, category)
 
       yield put(getProductSuccess(products))
 
-      for (const product of products) {
-        yield getAvailability(product.manufacturer)
+      const manufacturerList = Array.from(
+        new Set(products.map((p) => p.manufacturer))
+      )
+      for (const manufacturer of manufacturerList) {
+        yield getAvailability(manufacturer)
       }
     } catch (error) {
       yield showError(error)
@@ -35,11 +44,18 @@ function* getProducts() {
 function* getAvailability(manufacturer: string) {
   try {
     const state: RootState = yield select()
-    const localMan = state.product.availability.map((man) => man.manufacturer)
-    const found = localMan.find((man) => man === manufacturer)
-    if (!found) {
+
+    if (state.product.availability[manufacturer] === undefined) {
       const { response } = yield call(API.getManufacturer, manufacturer)
-      yield put(getAvailabilitySuccess(manufacturer, response))
+
+      const availability: Availability = {}
+      const availabilityData: AvailabilityData = {}
+      for (const res of response) {
+        availability[res.id.toLowerCase()] = res.DATAPAYLOAD
+      }
+      availabilityData[manufacturer] = availability
+
+      yield put(getAvailabilitySuccess(availabilityData))
     }
   } catch (error) {
     yield showError(error)

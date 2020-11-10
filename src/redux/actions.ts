@@ -6,7 +6,7 @@ import {
   HIDE_NOTIFICATION,
   ProductActions,
   Product,
-  Availability,
+  AvailabilityData,
 } from './type'
 
 export function getProducts(category: string): ProductActions {
@@ -24,15 +24,11 @@ export function getProductSuccess(products: Product[]): ProductActions {
 }
 
 export function getAvailabilitySuccess(
-  manufacturer: string,
-  availability: Availability[]
+  availabilityData: AvailabilityData
 ): ProductActions {
   return {
     type: GET_AVAILABILITY_SUCCESS,
-    payload: {
-      manufacturer,
-      availability,
-    },
+    payload: availabilityData,
   }
 }
 

@@ -6,14 +6,13 @@ import {
   ProductActions,
   ProductState,
   Product,
-  AvailabilityData,
 } from '../type'
 
 const initialState: ProductState = {
   jackets: [],
   shirts: [],
   accessories: [],
-  availability: [],
+  availability: {},
   notification: null,
 }
 
@@ -43,16 +42,20 @@ export function product(
       }
 
     case GET_AVAILABILITY_SUCCESS:
-      const avail: AvailabilityData[] = [
-        {
-          manufacturer: action.payload.manufacturer,
-          data: action.payload.availability,
-        },
-      ]
       return {
         ...state,
-        availability: [...state.availability, ...avail],
+        availability: { ...state.availability, ...action.payload },
       }
+    // const avail: AvailabilityData[] = [
+    //   {
+    //     manufacturer: action.payload.manufacturer,
+    //     data: action.payload.availability,
+    //   },
+    // ]
+    // return {
+    //   ...state,
+    //   availability: [...state.availability, ...avail],
+    // }
 
     case SHOW_NOTIFICATION:
       return {

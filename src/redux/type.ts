@@ -14,14 +14,22 @@ export type Product = {
 }
 
 export type Availability = {
+  [id: string]: string
+}
+
+export type AvailabilityData = {
+  [manufacturer: string]: Availability
+}
+
+export type AvailabilityResponse = {
   id: string
   DATAPAYLOAD: string
 }
 
-export type AvailabilityData = {
-  manufacturer: string
-  data: Availability[]
-}
+// export type AvailabilityData = {
+//   manufacturer: string
+//   data: Availability[]
+// }
 
 export type TimeOut = {
   category: string
@@ -40,10 +48,7 @@ export type GetProductSuccessAction = {
 
 export type GetAvailabilitySucess = {
   type: typeof GET_AVAILABILITY_SUCCESS
-  payload: {
-    manufacturer: string
-    availability: Availability[]
-  }
+  payload: AvailabilityData
 }
 
 export type ShowNotification = {
@@ -66,6 +71,6 @@ export type ProductState = {
   jackets: Product[]
   shirts: Product[]
   accessories: Product[]
-  availability: AvailabilityData[]
+  availability: AvailabilityData
   notification: string | null
 }
