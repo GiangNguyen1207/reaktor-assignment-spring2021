@@ -1,0 +1,14 @@
+.header {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    margin: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}

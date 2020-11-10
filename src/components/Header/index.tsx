@@ -1,7 +1,17 @@
-import React from "react";
+import React from 'react'
 
-const Header = () => {
-  return <div>Warehouse</div>;
-};
+import TimeUpdate from 'components/TimeUpdate'
+import './styles.scss'
 
-export default Header;
+const Header: React.FC = () => {
+  return (
+    <div className="header">
+      <h1 className="header__title">Warehouse</h1>
+      <TimeUpdate />
+    </div>
+  )
+}
+
+export default Header
+
+Header.displayName = 'Header'

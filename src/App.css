@@ -3,19 +3,3 @@ body {
   padding: 0;
   font-family: "Roboto", sans-serif;
 }
-
-.header {
-  width: 90%;
-  margin: 0 auto;
-  padding: 10px;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.navigation {
-  background: #321f28;
-  color: #f6f6f6;
-  text-transform: uppercase;
-}
