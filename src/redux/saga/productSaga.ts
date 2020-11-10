@@ -33,12 +33,16 @@ function* getProducts() {
 }
 
 function* getAvailability(manufacturer: string) {
-  const { response } = yield call(API.getManufacturer, manufacturer)
-  const state: RootState = yield select()
-  const localMan = state.product.availability.map((man) => man.manufacturer)
-  const found = localMan.find((man) => man === manufacturer)
-  if (!found) {
-    yield put(getAvailabilitySuccess(manufacturer, response))
+  try {
+    const state: RootState = yield select()
+    const localMan = state.product.availability.map((man) => man.manufacturer)
+    const found = localMan.find((man) => man === manufacturer)
+    if (!found) {
+      const { response } = yield call(API.getManufacturer, manufacturer)
+      yield put(getAvailabilitySuccess(manufacturer, response))
+    }
+  } catch (error) {
+    yield showError(error)
   }
 }
 
