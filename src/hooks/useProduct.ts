@@ -13,7 +13,7 @@ export default function useProduct(
   isSorted: boolean
 ) {
   const dispatch = useDispatch()
-  const { pJackets, pShirts, pAccesssories } = Categories
+  const { pJackets, pShirts, pAccessories } = Categories
   const { jackets, shirts, accessories, availability } = useSelector(
     (state: RootState) => ({
       jackets: state.product.jackets,
@@ -27,7 +27,7 @@ export default function useProduct(
     if (
       (category === `${pJackets}` && jackets.length === 0) ||
       (category === `${pShirts}` && shirts.length === 0) ||
-      (category === `${pAccesssories}` && accessories.length === 0)
+      (category === `${pAccessories}` && accessories.length === 0)
     ) {
       dispatch(getProducts(category))
     }

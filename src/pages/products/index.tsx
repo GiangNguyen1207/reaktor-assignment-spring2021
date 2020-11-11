@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 
 import useProduct from 'hooks/useProduct'
 import TableHeader from 'components/TableHeader'
@@ -15,14 +15,11 @@ const Jackets = () => {
     tableHeader,
     isSorted
   )
-  const tHeaders = [
-    'name',
-    'type',
-    'color',
-    'price',
-    'manufacturer',
-    'availability',
-  ]
+
+  const tHeaders = useMemo(
+    () => ['name', 'color', 'price', 'manufacturer', 'availability'],
+    []
+  )
 
   const handleClick = (tableHeader: string) => {
     setTableHeader(tableHeader)
