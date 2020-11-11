@@ -1,6 +1,5 @@
 .navigation {
   background: #1d2d50;
-  color: #f6f6f6;
   text-transform: uppercase;
 }
 
@@ -14,10 +13,16 @@
 
   &__item {
     padding: 15px;
+    text-decoration: none;
+    color: #f6f6f6;
 
     &:hover {
       cursor: pointer;
-      background: #1e5f74;
+      background: #008891;
     }
   }
+}
+
+.selected {
+  background: #1e5f74;
 }

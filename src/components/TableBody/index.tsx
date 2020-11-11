@@ -14,7 +14,6 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
         return (
           <tr key={product.id}>
             <td>{product.name}</td>
-            <td>{product.type}</td>
             <td>{product.color}</td>
             <td>{product.price}</td>
             <td>{product.manufacturer}</td>

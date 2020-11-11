@@ -1,27 +1,27 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+
+import Categories from 'constants/Categories'
 import './styles.scss'
 
 const NavigationBar: React.FC = () => {
-  const history = useHistory()
-  const categories = ['jackets', 'shirts', 'accessories']
-
-  const handleClick = (category: string) => {
-    history.push(`/${category}`)
-  }
+  const { pJackets, pShirts, pAccessories } = Categories
+  const categories = [pJackets, pShirts, pAccessories]
 
   return (
     <div className="navigation">
       <ul className="nav-list">
         {categories.map((cat: string) => {
           return (
-            <li
+            <NavLink
+              exact
+              to={`/${cat}`}
               className="nav-list__item"
+              activeClassName="selected"
               key={cat}
-              onClick={() => handleClick(cat)}
             >
               {cat}
-            </li>
+            </NavLink>
           )
         })}
       </ul>
