@@ -36,7 +36,7 @@ const Jackets = () => {
           tHeaders={tHeaders}
           handleClick={handleClick}
           isSorted={isSorted}
-          tableHeader={tableHeader}
+          selectedTableHeader={tableHeader}
         />
       </thead>
       <tbody>

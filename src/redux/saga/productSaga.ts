@@ -29,11 +29,8 @@ function* getProducts() {
 
       yield put(getProductSuccess(products))
 
-      const manufacturerList = Array.from(
-        new Set(products.map((p) => p.manufacturer))
-      )
-      for (const manufacturer of manufacturerList) {
-        yield getAvailability(manufacturer)
+      for (const product of products) {
+        yield getAvailability(product.manufacturer)
       }
     } catch (error) {
       yield showError(error)
@@ -44,8 +41,7 @@ function* getProducts() {
 function* getAvailability(manufacturer: string) {
   try {
     const state: RootState = yield select()
-
-    if (state.product.availability[manufacturer] === undefined) {
+    if (!state.product.availability[manufacturer]) {
       const { response } = yield call(API.getManufacturer, manufacturer)
 
       const availability: Availability = {}

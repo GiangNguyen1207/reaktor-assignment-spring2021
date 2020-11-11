@@ -7,13 +7,13 @@ type TableHeaderProps = {
   tHeaders: string[]
   handleClick: (header: string) => void
   isSorted: boolean
-  tableHeader: string
+  selectedTableHeader: string
 }
 const TableHeader: React.FC<TableHeaderProps> = ({
   tHeaders,
   handleClick,
   isSorted,
-  tableHeader,
+  selectedTableHeader,
 }: TableHeaderProps) => {
   return (
     <tr>
@@ -25,7 +25,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
             onClick={() => handleClick(header)}
           >
             {header}
-            {tableHeader === header && (
+            {selectedTableHeader === header && (
               <Icon icon={isSorted ? sortAsc : sortDesc} />
             )}
           </th>

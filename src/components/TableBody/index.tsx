@@ -25,7 +25,7 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
                 }}
               />
             ) : (
-              <td>Error loading...</td>
+              <td>Loading...</td>
             )}
           </tr>
         )
