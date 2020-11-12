@@ -6,21 +6,27 @@
   justify-content: space-between;
   align-items: center;
 
+  &__search {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__title {
     margin: 0;
     font-weight: bold;
     text-transform: uppercase;
   }
+}
 
-  &__icon {
-    position: absolute;
-    left: 58%;
-    top: 2%;
-    display: flex;
-  }
+.header-icon {
+  position: absolute;
+  left: 70%;
+  top: 2%;
+  display: flex;
+}
 
-  &__input {
-    padding: 10px 0 10px 30px;
-    width: 40%;
-  }
+.header-input {
+  padding: 10px 0 10px 35px;
+  width: 70%;
 }

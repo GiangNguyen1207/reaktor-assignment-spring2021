@@ -5,12 +5,15 @@ import NavigationBar from 'components/NavigationBar'
 import useProduct from 'hooks/useProduct'
 import DisplayTable from 'components/DisplayTable'
 import useSearchProduct from 'hooks/useSearchProduct'
+import { Product } from 'redux/type'
 
 const DisplayPage = () => {
   const [input, setInput] = useState<string>('')
+  const [searchedProducts, setSearchProducts] = useState<Product[]>([])
   const category = location.pathname.substr(1)
-  const { availability, sortedProducts } = useProduct(category)
   const { productList } = useSearchProduct(category, input)
+  const { availability, sortedProducts } = useProduct(category)
+
   const tHeaders = useMemo(
     () => ['name', 'color', 'price', 'manufacturer', 'availability'],
     []
@@ -23,13 +26,17 @@ const DisplayPage = () => {
     [input]
   )
 
+  const handleClick = () => {
+    setSearchProducts(productList)
+  }
+
   return (
     <>
-      <Header handleChange={handleChange} />
+      <Header handleChange={handleChange} handleClick={handleClick} />
       <NavigationBar />
       <DisplayTable
         tHeaders={tHeaders}
-        productList={productList}
+        productList={searchedProducts}
         sortedProducts={sortedProducts}
         availability={availability}
       />
