@@ -8,7 +8,7 @@ export type Product = {
   id: string
   type: string
   name: string
-  color: string
+  color: string[]
   price: number
   manufacturer: string
 }

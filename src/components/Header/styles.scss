@@ -11,4 +11,16 @@
     font-weight: bold;
     text-transform: uppercase;
   }
+
+  &__icon {
+    position: absolute;
+    left: 58%;
+    top: 2%;
+    display: flex;
+  }
+
+  &__input {
+    padding: 10px 0 10px 30px;
+    width: 40%;
+  }
 }

@@ -7,11 +7,7 @@ import { getProducts } from 'redux/actions'
 import Categories from 'constants/Categories'
 import { Product } from 'redux/type'
 
-export default function useProduct(
-  category: string,
-  tableHeader: string,
-  isSorted: boolean
-) {
+export default function useProduct(category: string) {
   const dispatch = useDispatch()
   const { pJackets, pShirts, pAccessories } = Categories
   const { jackets, shirts, accessories, availability } = useSelector(
@@ -25,9 +21,9 @@ export default function useProduct(
 
   useEffect(() => {
     if (
-      (category === `${pJackets}` && jackets.length === 0) ||
-      (category === `${pShirts}` && shirts.length === 0) ||
-      (category === `${pAccessories}` && accessories.length === 0)
+      (category === pJackets && jackets.length === 0) ||
+      (category === pShirts && shirts.length === 0) ||
+      (category === pAccessories && accessories.length === 0)
     ) {
       dispatch(getProducts(category))
     }
@@ -39,8 +35,8 @@ export default function useProduct(
       : category === pShirts
       ? shirts
       : accessories,
-    [tableHeader],
-    [isSorted ? 'asc' : 'desc']
+    ['name'],
+    ['asc']
   )
 
   return {

@@ -1,46 +1,41 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 
+import Header from 'components/Header'
+import NavigationBar from 'components/NavigationBar'
 import useProduct from 'hooks/useProduct'
-import TableHeader from 'components/TableHeader'
-import TableBody from 'components/TableBody'
-
+import DisplayTable from 'components/DisplayTable'
+import useSearchProduct from 'hooks/useSearchProduct'
 import './styles.scss'
 
-const Jackets = () => {
+const DisplayPage = () => {
+  const [input, setInput] = useState<string>('')
   const category = location.pathname.substr(1)
-  const [isSorted, setIsSorted] = useState<boolean>(true)
-  const [tableHeader, setTableHeader] = useState<string>('name')
-  const { availability, sortedProducts } = useProduct(
-    category,
-    tableHeader,
-    isSorted
-  )
-
+  const { availability, sortedProducts } = useProduct(category)
+  const { productList } = useSearchProduct(category, input)
   const tHeaders = useMemo(
     () => ['name', 'color', 'price', 'manufacturer', 'availability'],
     []
   )
 
-  const handleClick = (tableHeader: string) => {
-    setTableHeader(tableHeader)
-    setIsSorted(!isSorted)
-  }
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setInput(event.target.value)
+    },
+    [input]
+  )
 
   return (
-    <table className="table">
-      <thead>
-        <TableHeader
-          tHeaders={tHeaders}
-          handleClick={handleClick}
-          isSorted={isSorted}
-          selectedTableHeader={tableHeader}
-        />
-      </thead>
-      <tbody>
-        <TableBody products={sortedProducts} availability={availability} />
-      </tbody>
-    </table>
+    <>
+      <Header handleChange={handleChange} />
+      <NavigationBar />
+      <DisplayTable
+        tHeaders={tHeaders}
+        productList={productList}
+        sortedProducts={sortedProducts}
+        availability={availability}
+      />
+    </>
   )
 }
 
-export default Jackets
+export default React.memo(DisplayPage)

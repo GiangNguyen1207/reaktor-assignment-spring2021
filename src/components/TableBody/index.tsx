@@ -33,6 +33,6 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
   )
 }
 
-export default TableBody
+export default React.memo(TableBody)
 
 TableBody.displayName = 'TableBody'
