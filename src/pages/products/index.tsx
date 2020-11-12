@@ -5,7 +5,6 @@ import NavigationBar from 'components/NavigationBar'
 import useProduct from 'hooks/useProduct'
 import DisplayTable from 'components/DisplayTable'
 import useSearchProduct from 'hooks/useSearchProduct'
-import './styles.scss'
 
 const DisplayPage = () => {
   const [input, setInput] = useState<string>('')

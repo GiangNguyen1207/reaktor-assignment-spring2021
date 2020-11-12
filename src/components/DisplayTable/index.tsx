@@ -4,6 +4,7 @@ import _isEmpty from 'lodash/isEmpty'
 import TableHeader from 'components/TableHeader'
 import TableBody from 'components/TableBody'
 import { Product, AvailabilityData } from 'redux/type'
+import './styles.scss'
 
 type DisplayTableProps = {
   tHeaders: string[]
