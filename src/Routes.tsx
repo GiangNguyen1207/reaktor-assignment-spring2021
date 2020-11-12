@@ -1,16 +1,17 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
-import Products from 'pages/products'
+import DisplayPage from 'pages/products'
 import CategoryRoute from 'constants/Categories'
 
 const { pJackets, pShirts, pAccessories } = CategoryRoute
 
 const Routes = () => (
   <Switch>
-    <Route exact path={`/${pJackets}`} component={Products}></Route>
-    <Route exact path={`/${pShirts}`} component={Products}></Route>
-    <Route exact path={`/${pAccessories}`} component={Products}></Route>
+    <Route exact path={'/'} render={() => <Redirect to={`/${pJackets}`} />} />
+    <Route exact path={`/${pJackets}`} component={DisplayPage}></Route>
+    <Route exact path={`/${pShirts}`} component={DisplayPage}></Route>
+    <Route exact path={`/${pAccessories}`} component={DisplayPage}></Route>
   </Switch>
 )
 
