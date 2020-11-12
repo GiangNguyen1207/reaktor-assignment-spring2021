@@ -29,6 +29,6 @@ const NavigationBar: React.FC = () => {
   )
 }
 
-export default NavigationBar
+export default React.memo(NavigationBar)
 
 NavigationBar.displayName = 'NavigationBar'

@@ -3,8 +3,6 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Routes from 'Routes'
-import Header from 'components/Header'
-import NavigationBar from 'components/NavigationBar'
 import Notification from 'components/Notification'
 import { RootState } from 'redux/reducer'
 import { hideNotification } from 'redux/actions'
@@ -20,8 +18,6 @@ function App() {
 
   return (
     <>
-      <Header />
-      <NavigationBar />
       <Notification toggleNoti={message ? true : false} message={message} />
       <Routes />
     </>
