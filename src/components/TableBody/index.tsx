@@ -13,37 +13,38 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
 
   return (
     <>
-      {products.map((product) => {
-        return (
-          <tr key={product.id}>
-            <td>{product.name}</td>
-            <td>{product.color}</td>
-            <td>{product.price}</td>
-            <td>{product.manufacturer}</td>
-            {availability && availability[product.manufacturer] ? (
-              <td
-                dangerouslySetInnerHTML={
-                  availability[product.manufacturer][product.id].includes(
-                    inStock
-                  )
-                    ? {
-                        __html: 'In Stock',
-                      }
-                    : availability[product.manufacturer][product.id].includes(
-                        outOfStock
-                      )
-                    ? {
-                        __html: 'Out of Stock',
-                      }
-                    : { __html: 'Less than 10' }
-                }
-              />
-            ) : (
-              <td>Loading...</td>
-            )}
-          </tr>
-        )
-      })}
+      {products.length > 0 &&
+        products.map((product) => {
+          return (
+            <tr key={product.id}>
+              <td>{product.name}</td>
+              <td>{product.color}</td>
+              <td>{product.price}</td>
+              <td>{product.manufacturer}</td>
+              {availability && availability[product.manufacturer] ? (
+                <td
+                  dangerouslySetInnerHTML={
+                    availability[product.manufacturer][product.id].includes(
+                      inStock
+                    )
+                      ? {
+                          __html: 'In Stock',
+                        }
+                      : availability[product.manufacturer][product.id].includes(
+                          outOfStock
+                        )
+                      ? {
+                          __html: 'Out of Stock',
+                        }
+                      : { __html: 'Less than 10' }
+                  }
+                />
+              ) : (
+                <td>Loading...</td>
+              )}
+            </tr>
+          )
+        })}
     </>
   )
 }
