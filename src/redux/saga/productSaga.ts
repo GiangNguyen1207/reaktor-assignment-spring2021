@@ -24,7 +24,6 @@ function* getProducts() {
   yield takeLatest(GET_PRODUCTS, function* (action: GetProductsAction) {
     try {
       const category = action.payload
-      // axios.defaults.headers.common['x-force-error-mode'] = 'all'
       const products: Product[] = yield call(API.getProduct, category)
 
       yield put(getProductSuccess(products))
