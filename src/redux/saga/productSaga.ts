@@ -16,7 +16,7 @@ import {
 import { RootState } from 'redux/reducer'
 
 function* showError(error: any) {
-  if (!error) {
+  if (!error.response.data) {
     yield put(showNotification('Loading data failed. Please reload the page.'))
   }
   const message = error.response.data.message || error.message
