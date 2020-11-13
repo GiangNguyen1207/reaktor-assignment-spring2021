@@ -16,6 +16,9 @@ import {
 import { RootState } from 'redux/reducer'
 
 function* showError(error: any) {
+  if (!error) {
+    yield put(showNotification('Loading data failed. Please reload the page.'))
+  }
   const message = error.response.data.message || error.message
   yield put(showNotification(message))
 }
@@ -24,7 +27,6 @@ function* getProducts() {
   yield takeLatest(GET_PRODUCTS, function* (action: GetProductsAction) {
     try {
       const category = action.payload
-      // axios.defaults.headers.common['x-force-error-mode'] = 'all'
       const products: Product[] = yield call(API.getProduct, category)
 
       yield put(getProductSuccess(products))

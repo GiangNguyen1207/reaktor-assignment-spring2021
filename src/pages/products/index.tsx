@@ -4,15 +4,16 @@ import Header from 'components/Header'
 import NavigationBar from 'components/NavigationBar'
 import useProduct from 'hooks/useProduct'
 import DisplayTable from 'components/DisplayTable'
-import useSearchProduct from 'hooks/useSearchProduct'
 import { Product } from 'redux/type'
 
 const DisplayPage = () => {
   const [input, setInput] = useState<string>('')
   const [searchedProducts, setSearchProducts] = useState<Product[]>([])
   const category = location.pathname.substr(1)
-  const { productList } = useSearchProduct(category, input)
-  const { availability, sortedProducts } = useProduct(category)
+  const { availability, productList, searchedResults } = useProduct(
+    category,
+    input
+  )
 
   const tHeaders = useMemo(
     () => ['name', 'color', 'price', 'manufacturer', 'availability'],
@@ -21,23 +22,34 @@ const DisplayPage = () => {
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault()
       setInput(event.target.value)
     },
-    [input]
+    []
   )
 
-  const handleClick = () => {
-    setSearchProducts(productList)
+  const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setSearchProducts(searchedResults)
+  }
+
+  const handleRemoveSearchClick = () => {
+    setInput('')
+    setSearchProducts([])
   }
 
   return (
     <>
-      <Header handleChange={handleChange} handleClick={handleClick} />
-      <NavigationBar />
+      <Header
+        handleChange={handleChange}
+        handleClick={handleClick}
+        input={input}
+      />
+      <NavigationBar handleRemoveSearchClick={handleRemoveSearchClick} />
       <DisplayTable
         tHeaders={tHeaders}
-        productList={searchedProducts}
-        sortedProducts={sortedProducts}
+        productList={productList}
+        searchedProducts={searchedProducts}
         availability={availability}
       />
     </>

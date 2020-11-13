@@ -9,14 +9,14 @@ import './styles.scss'
 type DisplayTableProps = {
   tHeaders: string[]
   productList: Product[]
-  sortedProducts: Product[]
+  searchedProducts: Product[]
   availability: AvailabilityData | null
 }
 
 const DisplayTable: React.FC<DisplayTableProps> = ({
   tHeaders,
   productList,
-  sortedProducts,
+  searchedProducts,
   availability,
 }: DisplayTableProps) => {
   return (
@@ -26,7 +26,7 @@ const DisplayTable: React.FC<DisplayTableProps> = ({
       </thead>
       <tbody>
         <TableBody
-          products={_isEmpty(productList) ? sortedProducts : productList}
+          products={_isEmpty(searchedProducts) ? productList : searchedProducts}
           availability={availability}
         />
       </tbody>
