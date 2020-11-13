@@ -22,19 +22,30 @@ const DisplayPage = () => {
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault()
       setInput(event.target.value)
     },
-    [input]
+    []
   )
 
-  const handleClick = () => {
+  const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     setSearchProducts(searchedResults)
+  }
+
+  const handleRemoveSearchClick = () => {
+    setInput('')
+    setSearchProducts([])
   }
 
   return (
     <>
-      <Header handleChange={handleChange} handleClick={handleClick} />
-      <NavigationBar />
+      <Header
+        handleChange={handleChange}
+        handleClick={handleClick}
+        input={input}
+      />
+      <NavigationBar handleRemoveSearchClick={handleRemoveSearchClick} />
       <DisplayTable
         tHeaders={tHeaders}
         productList={productList}
@@ -46,38 +57,3 @@ const DisplayPage = () => {
 }
 
 export default React.memo(DisplayPage)
-
-// let searchedProducts: Product[] = []
-// if (input) {
-//   if (category === pJackets) {
-//     searchedProducts = jackets.filter((p) =>
-//       p.name.toLowerCase().includes(input.toLowerCase())
-//     )
-//   } else if (category === pShirts) {
-//     searchedProducts = shirts.filter((p) =>
-//       p.name.toLowerCase().includes(input.toLowerCase())
-//     )
-//   } else {
-//     searchedProducts = accessories.filter((p) =>
-//       p.name.toLowerCase().includes(input.toLowerCase())
-//     )
-//   }
-// }
-// console.log(searchedProducts)
-
-// const sortedProducts: Product[] = _orderBy(
-//   category === pJackets
-//     ? _isEmpty(searchedProducts)
-//       ? jackets
-//       : searchedProducts
-//     : category === pShirts
-//     ? _isEmpty(searchedProducts)
-//       ? shirts
-//       : searchedProducts
-//     : _isEmpty(searchedProducts)
-//     ? accessories
-//     : searchedProducts,
-//   ['name'],
-//   ['asc']
-// )
-// setProductList(sortedProducts)

@@ -4,7 +4,13 @@ import { NavLink } from 'react-router-dom'
 import Categories from 'constants/Categories'
 import './styles.scss'
 
-const NavigationBar: React.FC = () => {
+type NavigationBarProps = {
+  handleRemoveSearchClick: () => void
+}
+
+const NavigationBar: React.FC<NavigationBarProps> = ({
+  handleRemoveSearchClick,
+}: NavigationBarProps) => {
   const { pJackets, pShirts, pAccessories } = Categories
   const categories = [pJackets, pShirts, pAccessories]
 
@@ -19,6 +25,7 @@ const NavigationBar: React.FC = () => {
               className="nav-list__item"
               activeClassName="selected"
               key={cat}
+              onClick={handleRemoveSearchClick}
             >
               {cat}
             </NavLink>

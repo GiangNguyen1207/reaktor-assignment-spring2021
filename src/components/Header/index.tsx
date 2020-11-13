@@ -6,24 +6,29 @@ import './styles.scss'
 
 type HeaderProps = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  handleClick: () => void
+  handleClick: (event: React.FormEvent<HTMLFormElement>) => void
+  input: string
 }
 
 const Header: React.FC<HeaderProps> = ({
   handleChange,
   handleClick,
+  input,
 }: HeaderProps) => {
   return (
     <div className="header">
       <h1 className="header__title">Warehouse</h1>
       <div className="header__search">
         <Icon icon={search} className="header-icon" />
-        <input
-          className="header-input"
-          placeholder="Search name.."
-          onChange={handleChange}
-        />
-        <button onClick={handleClick}>Search</button>
+        <form onSubmit={handleClick} className="header-form">
+          <input
+            value={input}
+            className="header-input"
+            placeholder="Search name.."
+            onChange={handleChange}
+          />
+          <button>Search</button>
+        </form>
       </div>
     </div>
   )
