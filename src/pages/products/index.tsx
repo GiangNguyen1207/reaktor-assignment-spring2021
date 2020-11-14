@@ -1,12 +1,16 @@
 import React, { useState, useMemo, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import _isEmpty from 'lodash/isEmpty'
 
 import Header from 'components/Header'
 import NavigationBar from 'components/NavigationBar'
 import useProduct from 'hooks/useProduct'
 import DisplayTable from 'components/DisplayTable'
 import { Product } from 'redux/type'
+import { showNotification } from 'redux/actions'
 
 const DisplayPage = () => {
+  const dispatch = useDispatch()
   const [input, setInput] = useState<string>('')
   const [searchedProducts, setSearchProducts] = useState<Product[]>([])
   const category = location.pathname.substr(1)
@@ -31,6 +35,9 @@ const DisplayPage = () => {
   const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setSearchProducts(searchedResults)
+    if (_isEmpty(searchedProducts)) {
+      dispatch(showNotification('No products found. Please search again'))
+    }
   }
 
   const handleRemoveSearchClick = () => {
