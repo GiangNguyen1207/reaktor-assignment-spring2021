@@ -13,7 +13,7 @@ function App() {
 
   setTimeout(() => {
     dispatch(hideNotification())
-  }, 5000)
+  }, 3000)
 
   return (
     <>
