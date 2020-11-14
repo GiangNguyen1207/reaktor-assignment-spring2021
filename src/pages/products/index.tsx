@@ -33,11 +33,11 @@ const DisplayPage = () => {
   )
 
   const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setSearchProducts(searchedResults)
-    if (_isEmpty(searchedProducts)) {
+    if (_isEmpty(searchedResults)) {
       dispatch(showNotification('No products found. Please search again'))
     }
+    event.preventDefault()
+    setSearchProducts(searchedResults)
   }
 
   const handleRemoveSearchClick = () => {
