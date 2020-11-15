@@ -13,7 +13,7 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
 
   return (
     <>
-      {products.length > 0 &&
+      {products &&
         products.map((product) => {
           return (
             <tr key={product.id}>

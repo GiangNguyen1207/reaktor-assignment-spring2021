@@ -5,11 +5,12 @@ import Categories from 'constants/Categories'
 import './styles.scss'
 
 type NavigationBarProps = {
-  //handleRemoveSearchClick: () => void
+  handleRemoveSearchClick: () => void
 }
 
-const NavigationBar: React.FC<NavigationBarProps> = ({}: //handleRemoveSearchClick,
-NavigationBarProps) => {
+const NavigationBar: React.FC<NavigationBarProps> = ({
+  handleRemoveSearchClick,
+}: NavigationBarProps) => {
   const { pJackets, pShirts, pAccessories } = Categories
   const categories = [pJackets, pShirts, pAccessories]
 
@@ -24,7 +25,7 @@ NavigationBarProps) => {
               className="nav-list__item"
               activeClassName="selected"
               key={cat}
-              //onClick={handleRemoveSearchClick}
+              onClick={handleRemoveSearchClick}
             >
               {cat}
             </NavLink>

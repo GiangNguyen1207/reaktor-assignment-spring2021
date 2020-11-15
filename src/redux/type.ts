@@ -5,6 +5,7 @@ export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION'
 export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION'
 export const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
 export const SEARCH_PRODUCT_SUCCESS = 'SEARCH_PRODUCT_SUCCESS'
+export const REMOVE_SEARCHED_PRODUCT = 'REMOVE_SEARCHED_PRODUCT'
 
 export type Product = {
   id: string
@@ -65,6 +66,10 @@ export type SearchProductSuccess = {
   payload: Product[]
 }
 
+export type RemoveProduct = {
+  type: typeof REMOVE_SEARCHED_PRODUCT
+}
+
 export type ProductActions =
   | GetProductSuccessAction
   | GetProductsAction
@@ -73,6 +78,7 @@ export type ProductActions =
   | HideNotificaiton
   | SearchProduct
   | SearchProductSuccess
+  | RemoveProduct
 
 export type ProductState = {
   jackets: Product[]

@@ -6,6 +6,7 @@ import {
   HIDE_NOTIFICATION,
   SEARCH_PRODUCT,
   SEARCH_PRODUCT_SUCCESS,
+  REMOVE_SEARCHED_PRODUCT,
   ProductActions,
   Product,
   AvailabilityData,
@@ -63,5 +64,11 @@ export function searchProductSuccess(
   return {
     type: SEARCH_PRODUCT_SUCCESS,
     payload: searchedProducts,
+  }
+}
+
+export function removeSearchedProduct(): ProductActions {
+  return {
+    type: REMOVE_SEARCHED_PRODUCT,
   }
 }

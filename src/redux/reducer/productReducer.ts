@@ -4,6 +4,7 @@ import {
   SHOW_NOTIFICATION,
   HIDE_NOTIFICATION,
   SEARCH_PRODUCT_SUCCESS,
+  REMOVE_SEARCHED_PRODUCT,
   ProductActions,
   ProductState,
   Product,
@@ -65,6 +66,12 @@ export function product(
       return {
         ...state,
         searchedProducts: action.payload,
+      }
+
+    case REMOVE_SEARCHED_PRODUCT:
+      return {
+        ...state,
+        searchedProducts: [],
       }
 
     default:

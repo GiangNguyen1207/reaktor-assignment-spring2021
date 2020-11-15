@@ -5,7 +5,7 @@ import Header from 'components/Header'
 import NavigationBar from 'components/NavigationBar'
 import useProduct from 'hooks/useProduct'
 import DisplayTable from 'components/DisplayTable'
-import { searchProduct } from 'redux/actions'
+import { searchProduct, removeSearchedProduct } from 'redux/actions'
 import Categories from 'constants/Categories'
 
 const DisplayPage = () => {
@@ -39,10 +39,10 @@ const DisplayPage = () => {
     dispatch(searchProduct(category, input))
   }
 
-  // const handleRemoveSearchClick = () => {
-  //   setInput('')
-  //   setSearchProducts([])
-  // }
+  const handleRemoveSearchClick = () => {
+    setInput('')
+    dispatch(removeSearchedProduct())
+  }
 
   return (
     <>
@@ -51,7 +51,7 @@ const DisplayPage = () => {
         handleClick={handleClick}
         input={input}
       />
-      <NavigationBar />
+      <NavigationBar handleRemoveSearchClick={handleRemoveSearchClick} />
       <DisplayTable
         tHeaders={tHeaders}
         productList={
