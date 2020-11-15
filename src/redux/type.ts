@@ -86,5 +86,5 @@ export type ProductState = {
   accessories: Product[]
   availability: AvailabilityData
   notification: string | null
-  searchedProducts: Product[]
+  searchedProducts: Product[] | null
 }

@@ -21,7 +21,7 @@ import { RootState } from 'redux/reducer'
 import Categories from 'constants/Categories'
 
 function* showError(error: any) {
-  if (!error.response.data) {
+  if (!error.response) {
     yield put(showNotification('Loading data failed. Please reload the page.'))
   }
   const message = error.response.data.message || error.message

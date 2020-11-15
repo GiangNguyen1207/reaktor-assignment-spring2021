@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import _isEmpty from 'lodash/isEmpty'
 
 import { RootState } from 'redux/reducer'
 import { getProducts } from 'redux/actions'
@@ -25,9 +26,9 @@ export default function useProduct(category: string, input: string) {
 
   useEffect(() => {
     if (
-      (category === pJackets && jackets.length === 0) ||
-      (category === pShirts && shirts.length === 0) ||
-      (category === pAccessories && accessories.length === 0)
+      (category === pJackets && _isEmpty(jackets)) ||
+      (category === pShirts && _isEmpty(shirts)) ||
+      (category === pAccessories && _isEmpty(accessories))
     ) {
       dispatch(getProducts(category))
     }

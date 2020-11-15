@@ -16,7 +16,7 @@ const initialState: ProductState = {
   accessories: [],
   availability: {},
   notification: null,
-  searchedProducts: [],
+  searchedProducts: null,
 }
 
 export function product(
@@ -71,7 +71,7 @@ export function product(
     case REMOVE_SEARCHED_PRODUCT:
       return {
         ...state,
-        searchedProducts: [],
+        searchedProducts: null,
       }
 
     default:
