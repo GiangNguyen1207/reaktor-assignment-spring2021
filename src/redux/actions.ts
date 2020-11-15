@@ -4,6 +4,8 @@ import {
   GET_AVAILABILITY_SUCCESS,
   SHOW_NOTIFICATION,
   HIDE_NOTIFICATION,
+  SEARCH_PRODUCT,
+  SEARCH_PRODUCT_SUCCESS,
   ProductActions,
   Product,
   AvailabilityData,
@@ -42,5 +44,24 @@ export function showNotification(noti: string): ProductActions {
 export function hideNotification(): ProductActions {
   return {
     type: HIDE_NOTIFICATION,
+  }
+}
+
+export function searchProduct(category: string, input: string): ProductActions {
+  return {
+    type: SEARCH_PRODUCT,
+    payload: {
+      category,
+      input,
+    },
+  }
+}
+
+export function searchProductSuccess(
+  searchedProducts: Product[]
+): ProductActions {
+  return {
+    type: SEARCH_PRODUCT_SUCCESS,
+    payload: searchedProducts,
   }
 }
