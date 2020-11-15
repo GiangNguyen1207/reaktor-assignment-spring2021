@@ -14,8 +14,7 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
 
   return (
     <>
-      {!_isEmpty(products) ? (
-        products &&
+      {products && !_isEmpty(products) ? (
         products.map((product) => {
           return (
             <tr key={product.id}>
@@ -48,11 +47,9 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
           )
         })
       ) : (
-        <tr>
-          <td colSpan={5} className="table-no-product">
-            No products found.
-          </td>
-        </tr>
+        <td colSpan={5} className="table-row">
+          No products found.
+        </td>
       )}
     </>
   )
@@ -61,36 +58,3 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
 export default React.memo(TableBody)
 
 TableBody.displayName = 'TableBody'
-
-// {products.map((product) => {
-//   return (
-//     <tr key={product.id}>
-//       <td>{product.name}</td>
-//       <td>{product.color}</td>
-//       <td>{product.price}</td>
-//       <td>{product.manufacturer}</td>
-//       {availability[product.manufacturer] ? (
-//         <td
-//           dangerouslySetInnerHTML={
-//             availability[product.manufacturer][product.id].includes(
-//               inStock
-//             )
-//               ? {
-//                   __html: 'In Stock',
-//                 }
-//               : availability[product.manufacturer][
-//                   product.id
-//                 ].includes(outOfStock)
-//               ? {
-//                   __html: 'Out of Stock',
-//                 }
-//               : { __html: 'Less than 10' }
-//           }
-//         />
-//       ) : (
-//         <td>Loading...</td>
-//       )}
-//     </tr>
-//   )
-// })
-// }
