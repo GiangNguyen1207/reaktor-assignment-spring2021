@@ -1,5 +1,4 @@
 import React from 'react'
-import _isEmpty from 'lodash/isEmpty'
 
 import TableHeader from 'components/TableHeader'
 import TableBody from 'components/TableBody'
@@ -9,8 +8,8 @@ import './styles.scss'
 type DisplayTableProps = {
   tHeaders: string[]
   productList: Product[]
-  searchedProducts: Product[]
-  availability: AvailabilityData | null
+  searchedProducts: Product[] | null
+  availability: AvailabilityData
 }
 
 const DisplayTable: React.FC<DisplayTableProps> = ({
@@ -26,7 +25,7 @@ const DisplayTable: React.FC<DisplayTableProps> = ({
       </thead>
       <tbody>
         <TableBody
-          products={_isEmpty(searchedProducts) ? productList : searchedProducts}
+          products={searchedProducts === null ? productList : searchedProducts}
           availability={availability}
         />
       </tbody>

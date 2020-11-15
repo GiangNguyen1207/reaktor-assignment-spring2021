@@ -1,11 +1,12 @@
 import React from 'react'
+import _isEmpty from 'lodash/isEmpty'
 
 import { Product, AvailabilityData } from 'redux/type'
 import Availability from 'constants/Availability'
 
 type TableBodyProps = {
-  products: Product[]
-  availability: AvailabilityData | null
+  products: Product[] | null
+  availability: AvailabilityData
 }
 
 const TableBody = ({ products, availability }: TableBodyProps) => {
@@ -13,7 +14,8 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
 
   return (
     <>
-      {products.length > 0 &&
+      {!_isEmpty(products) ? (
+        products &&
         products.map((product) => {
           return (
             <tr key={product.id}>
@@ -21,7 +23,7 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
               <td>{product.color}</td>
               <td>{product.price}</td>
               <td>{product.manufacturer}</td>
-              {availability && availability[product.manufacturer] ? (
+              {availability[product.manufacturer] ? (
                 <td
                   dangerouslySetInnerHTML={
                     availability[product.manufacturer][product.id].includes(
@@ -44,7 +46,14 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
               )}
             </tr>
           )
-        })}
+        })
+      ) : (
+        <tr>
+          <td colSpan={5} className="table-no-product">
+            No products found.
+          </td>
+        </tr>
+      )}
     </>
   )
 }
@@ -52,3 +61,36 @@ const TableBody = ({ products, availability }: TableBodyProps) => {
 export default React.memo(TableBody)
 
 TableBody.displayName = 'TableBody'
+
+// {products.map((product) => {
+//   return (
+//     <tr key={product.id}>
+//       <td>{product.name}</td>
+//       <td>{product.color}</td>
+//       <td>{product.price}</td>
+//       <td>{product.manufacturer}</td>
+//       {availability[product.manufacturer] ? (
+//         <td
+//           dangerouslySetInnerHTML={
+//             availability[product.manufacturer][product.id].includes(
+//               inStock
+//             )
+//               ? {
+//                   __html: 'In Stock',
+//                 }
+//               : availability[product.manufacturer][
+//                   product.id
+//                 ].includes(outOfStock)
+//               ? {
+//                   __html: 'Out of Stock',
+//                 }
+//               : { __html: 'Less than 10' }
+//           }
+//         />
+//       ) : (
+//         <td>Loading...</td>
+//       )}
+//     </tr>
+//   )
+// })
+// }

@@ -11,6 +11,7 @@ const initialState: RootState = {
     accessories: [],
     availability: {},
     notification: null,
+    searchedProducts: null,
   },
 }
 

@@ -3,6 +3,8 @@ import {
   GET_AVAILABILITY_SUCCESS,
   SHOW_NOTIFICATION,
   HIDE_NOTIFICATION,
+  SEARCH_PRODUCT_SUCCESS,
+  REMOVE_SEARCHED_PRODUCT,
   ProductActions,
   ProductState,
   Product,
@@ -14,6 +16,7 @@ const initialState: ProductState = {
   accessories: [],
   availability: {},
   notification: null,
+  searchedProducts: null,
 }
 
 export function product(
@@ -57,6 +60,18 @@ export function product(
       return {
         ...state,
         notification: null,
+      }
+
+    case SEARCH_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        searchedProducts: action.payload,
+      }
+
+    case REMOVE_SEARCHED_PRODUCT:
+      return {
+        ...state,
+        searchedProducts: null,
       }
 
     default:

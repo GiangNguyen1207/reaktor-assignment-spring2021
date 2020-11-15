@@ -1,22 +1,27 @@
 import { takeLatest, put, call, fork, select } from 'redux-saga/effects'
+import _orderBy from 'lodash/orderBy'
 
 import API from 'services/api'
 import {
   getProductSuccess,
   getAvailabilitySuccess,
   showNotification,
+  searchProductSuccess,
 } from 'redux/actions'
 import {
   GET_PRODUCTS,
+  SEARCH_PRODUCT,
   GetProductsAction,
   Product,
   Availability,
   AvailabilityData,
+  SearchProduct,
 } from 'redux/type'
 import { RootState } from 'redux/reducer'
+import Categories from 'constants/Categories'
 
 function* showError(error: any) {
-  if (!error.response.data) {
+  if (!error.response) {
     yield put(showNotification('Loading data failed. Please reload the page.'))
   }
   const message = error.response.data.message || error.message
@@ -29,10 +34,15 @@ function* getProducts() {
       const category = action.payload
       const products: Product[] = yield call(API.getProduct, category)
 
-      yield put(getProductSuccess(products))
+      const sortedProducts: Product[] = _orderBy(products, ['name'], ['asc'])
+      yield put(getProductSuccess(sortedProducts))
 
-      for (const product of products) {
-        yield getAvailability(product.manufacturer)
+      const manufacturerList = Array.from(
+        new Set(products.map((p) => p.manufacturer))
+      )
+
+      for (const manufacturer of manufacturerList) {
+        yield getAvailability(manufacturer)
       }
     } catch (error) {
       yield showError(error)
@@ -60,4 +70,27 @@ function* getAvailability(manufacturer: string) {
   }
 }
 
-export default [getProducts].map(fork)
+function* searchProduct() {
+  yield takeLatest(SEARCH_PRODUCT, function* (action: SearchProduct) {
+    const { category, input } = action.payload
+    let searchedProducts: Product[] = []
+    const state: RootState = yield select()
+    const { pJackets, pShirts } = Categories
+    if (category === pJackets) {
+      searchedProducts = state.product.jackets.filter((p) =>
+        p.name.toLowerCase().includes(input.toLowerCase())
+      )
+    } else if (category === pShirts) {
+      searchedProducts = state.product.jackets.filter((p) =>
+        p.name.toLowerCase().includes(input.toLowerCase())
+      )
+    } else {
+      searchedProducts = state.product.jackets.filter((p) =>
+        p.name.toLowerCase().includes(input.toLowerCase())
+      )
+    }
+    yield put(searchProductSuccess(searchedProducts))
+  })
+}
+
+export default [getProducts, searchProduct].map(fork)
