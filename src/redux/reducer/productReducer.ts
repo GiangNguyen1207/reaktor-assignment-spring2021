@@ -1,4 +1,5 @@
 import {
+  GET_PRODUCTS,
   GET_PRODUCTS_SUCCESS,
   GET_AVAILABILITY_SUCCESS,
   SHOW_NOTIFICATION,
@@ -17,6 +18,7 @@ const initialState: ProductState = {
   availability: {},
   notification: null,
   searchedProducts: null,
+  isLoading: false,
 }
 
 export function product(
@@ -24,24 +26,33 @@ export function product(
   action: ProductActions
 ): ProductState {
   switch (action.type) {
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        isLoading: true,
+      }
+
     case GET_PRODUCTS_SUCCESS:
       const products = action.payload
       if (products.map((p: Product) => p.type).includes('jackets')) {
         return {
           ...state,
           jackets: action.payload,
+          isLoading: false,
         }
       }
       if (products.map((p: Product) => p.type).includes('shirts')) {
         return {
           ...state,
           shirts: action.payload,
+          isLoading: false,
         }
       }
 
       return {
         ...state,
         accessories: action.payload,
+        isLoading: false,
       }
 
     case GET_AVAILABILITY_SUCCESS:

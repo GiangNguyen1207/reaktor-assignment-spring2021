@@ -12,6 +12,7 @@ const initialState: RootState = {
     availability: {},
     notification: null,
     searchedProducts: null,
+    isLoading: false,
   },
 }
 

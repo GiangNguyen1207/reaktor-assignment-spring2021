@@ -24,11 +24,6 @@ export type AvailabilityData = {
   [manufacturer: string]: Availability
 }
 
-export type TimeOut = {
-  category: string
-  startingTime: number
-}
-
 export type GetProductsAction = {
   type: typeof GET_PRODUCTS
   payload: string
@@ -87,4 +82,5 @@ export type ProductState = {
   availability: AvailabilityData
   notification: string | null
   searchedProducts: Product[] | null
+  isLoading: boolean
 }
