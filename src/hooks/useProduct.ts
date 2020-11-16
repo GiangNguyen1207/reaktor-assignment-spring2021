@@ -16,12 +16,14 @@ export default function useProduct(category: string, input: string) {
     accessories,
     availability,
     searchedProducts,
+    isLoading,
   } = useSelector((state: RootState) => ({
     jackets: state.product.jackets,
     shirts: state.product.shirts,
     accessories: state.product.accessories,
     availability: state.product.availability,
     searchedProducts: state.product.searchedProducts,
+    isLoading: state.product.isLoading,
   }))
 
   useEffect(() => {
@@ -40,5 +42,6 @@ export default function useProduct(category: string, input: string) {
     accessories,
     availability,
     searchedProducts,
+    isLoading,
   }
 }

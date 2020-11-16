@@ -10,6 +10,7 @@ type DisplayTableProps = {
   productList: Product[]
   searchedProducts: Product[] | null
   availability: AvailabilityData
+  isLoading: boolean
 }
 
 const DisplayTable: React.FC<DisplayTableProps> = ({
@@ -17,6 +18,7 @@ const DisplayTable: React.FC<DisplayTableProps> = ({
   productList,
   searchedProducts,
   availability,
+  isLoading,
 }: DisplayTableProps) => {
   return (
     <table className="table">
@@ -27,6 +29,7 @@ const DisplayTable: React.FC<DisplayTableProps> = ({
         <TableBody
           products={searchedProducts === null ? productList : searchedProducts}
           availability={availability}
+          isLoading={isLoading}
         />
       </tbody>
     </table>

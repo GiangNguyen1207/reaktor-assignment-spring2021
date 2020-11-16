@@ -19,6 +19,7 @@ const DisplayPage = () => {
     accessories,
     availability,
     searchedProducts,
+    isLoading,
   } = useProduct(category, input)
 
   const tHeaders = useMemo(
@@ -63,6 +64,7 @@ const DisplayPage = () => {
         }
         searchedProducts={searchedProducts}
         availability={availability}
+        isLoading={isLoading}
       />
     </>
   )
