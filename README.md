@@ -27,4 +27,4 @@ $ yarn start
 
 * [React](https://reactjs.org/) 
 
-* [Lodash] (https://lodash.com/)
+* [Lodash](https://lodash.com/)
