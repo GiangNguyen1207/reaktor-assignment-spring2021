@@ -8,7 +8,7 @@ Live demo: https://gn-reaktor-assignment-2021.herokuapp.com/
 
 Clone the repository 
 ```
-$ git clone git@github.com:GiangNguyen1207/CountryApp.git
+$ git clone git@github.com:GiangNguyen1207/reaktor-assignment-spring2021.git
 ```
 
 Install all the dependencies
