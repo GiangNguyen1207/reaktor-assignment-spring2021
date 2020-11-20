@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Reaktor assignment for junior developer position in Spring 2021
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
